@@ -31,9 +31,10 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--black) url("assets/topography-tile.webp") center top/2000px auto repeat;color:var(--white);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--black)}
 @media (max-width:900px),(hover:none){.hero .topo{background-image:url("assets/topography-5m.webp")}}
+.topo-all{position:fixed;left:0;right:0;top:-10vh;bottom:-10vh;z-index:-5;pointer-events:none;background:var(--black) url("assets/topography-5m.webp") center/cover no-repeat;opacity:.22;transform:translateZ(0)}
 a{color:inherit}
 a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -164,6 +165,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em}
 </head>
 <body>
 
+<div class="topo-all" aria-hidden="true"></div>
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="mark" href="#top"><img src="assets/jesters-logo-sm.png" alt="" width="120" height="118"><span>Bristol Jesters</span></a>
@@ -231,7 +233,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em}
     <a class="mail" href="#"></a>
     <a class="ig" href="#" target="_blank" rel="noopener"></a>
   </div>
-  <small>© 2026 Bristol Jesters Volleyball Club · Logo by <a href="https://www.instagram.com/bennettmadeit/" target="_blank" rel="noopener">@bennettmadeit</a></small>
+  <small>© 2026 Bristol Jesters Volleyball Club · Logo by <a href="https://www.instagram.com/bennettmadeit/" target="_blank" rel="noopener">@bennettmadeit</a><br>Website developed by <a href="https://www.fluxdevelopments.co.uk" target="_blank" rel="noopener">Flux Developments</a></small>
 </div></footer>
 
 <script>
