@@ -33,8 +33,8 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--black)}
-@media (max-width:900px),(hover:none){.hero .topo{background-image:url("assets/topography-5m.webp")}}
-.topo-all{position:fixed;left:0;right:0;top:-10vh;bottom:-10vh;z-index:-5;pointer-events:none;background:var(--black) url("assets/topography-5m.webp") center/cover no-repeat;opacity:.22;transform:translateZ(0)}
+.topo-all{position:fixed;left:0;right:0;top:-10vh;bottom:-10vh;z-index:-5;pointer-events:none;background:url("assets/topography-5m.webp") center/cover no-repeat;opacity:var(--topo,.95);transform:translateZ(0);will-change:opacity}
+@media (min-width:901px) and (hover:hover){.topo-all{background-image:url("assets/topography-5m.svg")}}
 a{color:inherit}
 a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -54,7 +54,6 @@ a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radiu
 
 /* hero */
 .hero{position:relative;min-height:min(92svh,980px);display:grid;place-items:center;overflow:hidden;isolation:isolate}
-.hero .topo{position:absolute;inset:-4%;z-index:-2;background:url("assets/topography-5m.svg") center 40%/cover no-repeat;opacity:.95;animation:drift 40s ease-in-out infinite alternate;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
   radial-gradient(60% 55% at 50% 46%,rgba(10,9,10,.55),rgba(10,9,10,0) 70%),
   linear-gradient(180deg,rgba(10,9,10,.55) 0%,rgba(10,9,10,0) 22%)}
@@ -69,7 +68,7 @@ a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radiu
 .sponsor-tag:hover{border-color:var(--plum-lt);color:var(--white)}
 .sponsor-tag img{width:34px;height:34px;flex:none}
 @media (max-width:520px){.hero-in .label{font-size:12px;letter-spacing:.28em}.sponsor-tag{font-size:11px;letter-spacing:.14em}}
-@media (prefers-reduced-motion:reduce){.hero .topo,.hero-in img,.hero-in .label,.sponsor-tag{animation:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.hero-in img,.hero-in .label,.sponsor-tag{animation:none}html{scroll-behavior:auto}}
 
 /* sections */
 section{padding-block:clamp(72px,10vw,128px);border-top:1px solid var(--hair)}
@@ -257,7 +256,6 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em;line-height:1
 
 <main id="top">
   <div class="hero">
-    <div class="topo" aria-hidden="true"></div>
     <div class="hero-in">
       <img src="assets/jesters-logo.png" alt="Bristol Jesters" width="900" height="882">
       <p class="label">Bristol &nbsp;·&nbsp; Volleyball &nbsp;·&nbsp; 2026/2027</p>
@@ -376,7 +374,19 @@ const CLUB = {
   const igUrl = "https://www.instagram.com/" + CLUB.instagram + "/";
 
   const nav = document.getElementById("nav");
-  const onScroll = () => nav.classList.toggle("solid", window.scrollY > 40);
+  // one fixed map behind the whole page: bright at the top, fading to a quiet backdrop as you scroll
+  const topo = document.querySelector(".topo-all"), heroEl = document.querySelector(".hero");
+  let ticking = false;
+  const setTopo = () => {
+    const h = heroEl ? heroEl.offsetHeight : innerHeight;
+    const t = Math.min(1, Math.max(0, scrollY / (h * 0.85)));
+    topo.style.setProperty("--topo", (0.95 - t * 0.73).toFixed(3));
+    ticking = false;
+  };
+  const onScroll = () => {
+    nav.classList.toggle("solid", window.scrollY > 40);
+    if (!ticking) { ticking = true; requestAnimationFrame(setTopo); }
+  };
   onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
 
   document.querySelectorAll(".mail").forEach(a => { a.href = "mailto:" + CLUB.email; a.textContent = CLUB.email; });
