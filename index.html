@@ -133,11 +133,8 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .side b{font:700 clamp(18px,2.4vw,28px)/1.05 var(--f-head);text-transform:uppercase;letter-spacing:.03em;color:var(--white)}
 .side small{font:600 11px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--grey)}
 .vs .v{font:800 clamp(28px,4vw,48px)/1 var(--f-head);color:var(--plum-lt);letter-spacing:.04em}
-.plate{display:grid;place-items:center;border-radius:50%;background:#F5EFF3;box-shadow:0 14px 30px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.06);aspect-ratio:1}
-.plate img{width:78%;height:78%;object-fit:contain}
-.plate.us{background:radial-gradient(circle at 50% 40%,#2a1a25,#120c10);box-shadow:0 14px 30px rgba(0,0,0,.45),inset 0 0 0 2px var(--plum)}
-.plate.us img{width:84%;height:84%}
-.nextg .plate{width:clamp(96px,16vw,170px)}
+.badge{display:inline-block;object-fit:contain;flex:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
+.nextg .badge{width:clamp(100px,17vw,180px);height:clamp(100px,17vw,180px)}
 .nextg .info{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;margin-top:clamp(24px,3.5vw,36px);padding-top:clamp(20px,3vw,28px);border-top:1px solid var(--hair);text-align:center}
 .nextg .info div{display:grid;gap:7px}
 .nextg .info dt{font:600 11px/1 var(--f-head);letter-spacing:.26em;text-transform:uppercase;color:var(--plum-lt)}
@@ -147,9 +144,13 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .nextg .cd{display:inline-block;margin-top:10px;font:700 12px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;background:var(--plum);color:#fff;padding:7px 11px;border-radius:3px}
 @media (prefers-reduced-motion:reduce){.nextg .eyebrow i{animation:none}}
 @media (max-width:520px){.side small{display:none}.nextg .info{gap:16px 22px}}
-.lt .plate{display:inline-grid;width:30px;vertical-align:-9px;margin-right:12px;box-shadow:none}
-.lt .plate img{width:82%;height:82%}
-@media (max-width:700px){.lt .plate{width:24px;margin-right:8px;vertical-align:-7px}}
+.lt .badge{width:34px;height:34px;vertical-align:-11px;margin-right:12px;filter:none}
+@media (max-width:700px){.lt .badge{width:26px;height:26px;margin-right:8px;vertical-align:-8px}}
+.slot .m .badge{width:26px;height:26px;vertical-align:-7px;margin-right:8px;filter:none}
+.slot .m .badge.b2{margin-left:2px}
+.slot.ref .m .badge{opacity:.55}
+.slot .m .tn{white-space:nowrap}
+@media (max-width:520px){.slot .m{display:flex;flex-direction:column;gap:6px}.slot .m>em{display:none}.slot .m .tn{display:flex;align-items:center;white-space:normal}.slot .m .badge{width:22px;height:22px;margin-right:8px;vertical-align:0}.slot .m .mvp{margin-top:2px}}
 
 /* league table */
 .lt-wrap{overflow-x:auto;border-top:1px solid var(--hair)}
@@ -380,13 +381,13 @@ const CLUB = {
     [/uwe/i, "assets/teams/uwe.png"]
   ];
   const badge = n => (BADGES.find(([re]) => re.test(n)) || [])[1];
-  const plate = (n, cls = "") => { const b = badge(n); return b ? `<span class="plate${/jesters/i.test(n) ? " us" : ""}${cls}"><img src="${b}" alt="" loading="lazy"></span>` : ""; };
+  const plate = (n, cls = "") => { const b = badge(n); return b ? `<img class="badge${cls}" src="${b}" alt="" loading="lazy">` : ""; };
 
   // fixtures
   const US = CLUB.us;
   const today = new Date(); today.setHours(0,0,0,0);
   const parse = d => new Date(d + "T12:00:00");
-  const team = n => n === US ? `<span class="us">Jesters</span>` : esc(n);
+  const team = n => `<span class="tn">${plate(n)}${n === US ? `<span class="us">Jesters</span>` : esc(n)}</span>`;
   const slot = ([tm, a, b, res, mvp, sets]) => {
     const play = a === US || b === US;
     return `<li class="slot${play ? "" : " ref"}"><span class="tag">${play ? "Play" : "Ref"}</span><span class="tm">${esc(tm)}</span>`
