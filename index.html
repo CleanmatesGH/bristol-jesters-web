@@ -33,7 +33,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--black)}
-.topo-all{position:fixed;inset:0;z-index:-5;pointer-events:none;background:url("assets/topography-5m.svg") center/cover no-repeat;opacity:.2}
+.topo-all{position:fixed;top:0;left:0;right:0;height:120vh;height:100lvh;z-index:-5;pointer-events:none;background:url("assets/topography-5m.svg") center/cover no-repeat;opacity:.2}
 a{color:inherit}
 a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -48,7 +48,8 @@ a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radiu
 .nav ul{margin:0 0 0 auto;padding:0;list-style:none;display:flex;gap:30px}
 .nav ul a{text-decoration:none;font:600 14px/1 var(--f-head);letter-spacing:.22em;text-transform:uppercase;color:var(--grey);transition:color .2s}
 .nav ul a:hover{color:var(--white)}
-@media (max-width:700px){.nav ul{gap:16px}.nav ul li:nth-child(n+3){display:none}.nav .mark span{display:none}}
+@media (max-width:700px){.nav .wrap{gap:12px}.nav ul{gap:14px}.nav ul a{font-size:13px;letter-spacing:.12em}.nav .mark span{display:none}.nav .mark img{width:34px}}
+@media (max-width:350px){.nav ul{gap:10px}.nav ul a{font-size:12px;letter-spacing:.06em}}
 
 /* hero */
 .hero{position:relative;min-height:min(92svh,980px);display:grid;place-items:center;overflow:hidden;isolation:isolate}
