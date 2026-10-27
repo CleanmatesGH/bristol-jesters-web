@@ -404,7 +404,7 @@ const CLUB = {
     [/uwe/i, "assets/teams/uwe.png"]
   ];
   const badge = n => (BADGES.find(([re]) => re.test(n)) || [])[1];
-  const plate = (n, cls = "") => { const b = badge(n); return b ? `<img class="badge${cls}" src="${b}" alt="" loading="lazy">` : ""; };
+  const plate = (n, cls = "", big = false) => { let b = badge(n); if (b && big) b = b.replace("jesters-logo-sm", "jesters-logo-md"); return b ? `<img class="badge${cls}" src="${b}" alt="" loading="lazy">` : ""; };
 
   // fixtures
   const US = CLUB.us;
@@ -475,7 +475,7 @@ const CLUB = {
     const d = parse(md.date);
     const days = Math.round((d - today) / 864e5) - 0;
     const when = days <= 0 ? "Today" : days === 1 ? "Tomorrow" : `In ${days} days`;
-    const side = n => `<div class="side">${plate(n)}<b>${n === US ? "Bristol Jesters" : esc(n)}</b></div>`;
+    const side = n => `<div class="side">${plate(n, "", true)}<b>${n === US ? "Bristol Jesters" : esc(n)}</b></div>`;
     const nm = n => n === US ? "Bristol Jesters" : esc(n);
     const more = games.slice(1).map(([t, x, y]) => `<div class="then2"><span class="lb">Then <b>${esc(t)}</b></span><span class="mu"><span class="tn r">${nm(x)}${plate(x)}</span><em>v</em><span class="tn">${plate(y)}${nm(y)}</span></span></div>`).join("");
     document.getElementById("nextGame").innerHTML = `<div class="nextg">
