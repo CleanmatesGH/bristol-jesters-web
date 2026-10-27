@@ -139,10 +139,6 @@ a.partner:hover{background:rgba(20,17,19,.9)}
 @media (max-width:760px){.partners{grid-template-columns:1fr}.partner.principal{grid-template-columns:1fr}}
 
 /* instagram */
-.ig-follow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:clamp(28px,4vw,44px);border:1px solid var(--hair);text-decoration:none;transition:background .25s}
-.ig-follow{background:rgba(10,9,10,.6)}.ig-follow:hover{background:rgba(20,17,19,.9)}
-.ig-follow span{font:700 clamp(28px,4vw,44px)/1 var(--f-head);letter-spacing:.02em;min-width:0;overflow-wrap:anywhere}
-.ig-follow b{font:600 13px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--plum-lt)}
 
 .ig-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:6px}
 .ig-post,.ig-ph{position:relative;display:block;aspect-ratio:1;max-width:100%;overflow:hidden;background:var(--raise)}
@@ -152,6 +148,8 @@ a.partner:hover{background:rgba(20,17,19,.9)}
 @media (max-width:700px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.ig-post img{transition:none}}
 
+#instagram[hidden]{display:none}
+
 /* footer */
 footer{border-top:1px solid var(--hair);padding-block:56px calc(48px + env(safe-area-inset-bottom,0px))}
 footer .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:28px 48px;align-items:center}
@@ -159,8 +157,9 @@ footer img{width:84px;height:auto}
 footer .links{display:flex;flex-wrap:wrap;gap:10px 32px;font:600 15px/1 var(--f-head);letter-spacing:.2em;text-transform:uppercase;min-width:0}
 footer .links a{text-decoration:none;color:var(--white);overflow-wrap:anywhere}
 footer .links a:hover{color:var(--plum-lt)}
-footer small{color:var(--grey);font-size:13px;letter-spacing:.06em}
-@media (max-width:700px){footer .wrap{grid-template-columns:1fr}}
+footer small{color:var(--grey);font-size:13px;letter-spacing:.06em;line-height:1.7}
+.credits{display:flex;flex-direction:column}
+@media (max-width:700px){footer .wrap{grid-template-columns:1fr;justify-items:center;text-align:center;gap:24px}footer .links{justify-content:center}}
 </style>
 </head>
 <body>
@@ -233,7 +232,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em}
     <a class="mail" href="#"></a>
     <a class="ig" href="#" target="_blank" rel="noopener"></a>
   </div>
-  <small>© 2026 Bristol Jesters Volleyball Club · Logo by <a href="https://www.instagram.com/bennettmadeit/" target="_blank" rel="noopener">@bennettmadeit</a><br>Website developed by <a href="https://www.fluxdevelopments.co.uk" target="_blank" rel="noopener">Flux Developments</a></small>
+  <small class="credits"><span>© 2026 Bristol Jesters Volleyball Club</span><span>Logo by <a href="https://www.instagram.com/bennettmadeit/" target="_blank" rel="noopener">@bennettmadeit</a></span><span>Website developed by <a href="https://www.fluxdevelopments.co.uk" target="_blank" rel="noopener">Flux Developments</a></span></small>
 </div></footer>
 
 <script>
@@ -334,14 +333,19 @@ const CLUB = {
     return `<${tag} class="partner${i===0?" principal":""}${wide?" wide":""}"${href}>${logo}<div><p class="label">${esc(p.role)}</p>${title}${p.text ? `<p>${esc(p.text)}</p>` : ""}${p.url?`<span class="go">Visit site →</span>`:""}</div></${tag}>`;
   }).join("");
 
-  // instagram
-  const igOut = document.getElementById("igOut");
-  document.getElementById("igLabel").textContent = "@" + CLUB.instagram;
-  const follow = `<a class="ig-follow" href="${igUrl}" target="_blank" rel="noopener"><span>@${esc(CLUB.instagram)}</span><b>Follow on Instagram →</b></a>`;
-  if (!CLUB.instagramFeed) { igOut.innerHTML = follow; }
+  // instagram: the feed's own username sets the label and every Instagram link
+  const igOut = document.getElementById("igOut"), igSection = document.getElementById("instagram");
+  const setIg = user => {
+    const url = "https://www.instagram.com/" + user + "/";
+    document.getElementById("igLabel").innerHTML = `<a href="${esc(url)}" target="_blank" rel="noopener" style="text-decoration:none">@${esc(user)}</a>`;
+    document.querySelectorAll(".ig").forEach(a => { a.href = url; });
+  };
+  setIg(CLUB.instagram);
+  if (!CLUB.instagramFeed) { igSection.hidden = true; }
   else {
     igOut.innerHTML = `<div class="ig-grid" aria-busy="true">${'<span class="ig-ph"></span>'.repeat(CLUB.instagramPosts)}</div>`;
     fetch(CLUB.instagramFeed).then(r => { if (!r.ok) throw r.status; return r.json(); }).then(feed => {
+      if (feed.username) setIg(feed.username);
       const posts = (feed.posts || []).slice(0, CLUB.instagramPosts);
       if (!posts.length) throw "empty";
       const img = p => (p.sizes && (p.sizes.medium || p.sizes.small || p.sizes.large) || {}).mediaUrl || (p.mediaType === "VIDEO" ? p.thumbnailUrl : p.mediaUrl);
@@ -349,8 +353,8 @@ const CLUB = {
         const alt = esc((p.prunedCaption || p.caption || "Instagram post").slice(0, 120));
         const icon = p.mediaType === "VIDEO" ? `<i class="ig-kind">${p.isReel ? "Reel" : "Video"}</i>` : p.mediaType === "CAROUSEL_ALBUM" ? `<i class="ig-kind">Gallery</i>` : "";
         return `<a class="ig-post" href="${esc(p.permalink)}" target="_blank" rel="noopener"><img src="${esc(img(p))}" alt="${alt}" loading="lazy">${icon}</a>`;
-      }).join("")}</div>` + follow;
-    }).catch(() => { igOut.innerHTML = follow; });
+      }).join("")}</div>`;
+    }).catch(() => { igSection.hidden = true; });
   }
 })();
 </script>
