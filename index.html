@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="theme-color" content="#0A090A">
+<meta property="og:title" content="Bristol Jesters">
+<meta property="og:description" content="Bristol Jesters Volleyball Club">
+<meta property="og:image" content="https://bristoljesters.co.uk/assets/jesters-logo.png">
+<title>Bristol Jesters</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Bristol Jesters Volleyball Club. Fixtures, kit and official partners.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: full-bleed 5 m Bristol contour hero with the crest, then quiet black sections divided by hairlines. One accent: kit plum. */
+:root{
+  --black:#0A090A;
+  --raise:#141113;
+  --plum:#7A3468;
+  --plum-lt:#B76AA3;
+  --white:#F7F4F6;
+  --grey:#9C9399;
+  --hair:rgba(247,244,246,.10);
+  --f-head:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--black)}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.label{font:600 13px/1 var(--f-head);letter-spacing:.32em;text-transform:uppercase;color:var(--plum-lt);margin:0}
+
+/* nav */
+.nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(10,9,10,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--hair)}
+.nav .wrap{display:flex;align-items:center;height:68px;gap:24px}
+.nav .mark{display:flex;align-items:center;gap:12px;text-decoration:none;font:700 17px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase}
+.nav .mark img{width:40px;height:auto}
+.nav ul{margin:0 0 0 auto;padding:0;list-style:none;display:flex;gap:30px}
+.nav ul a{text-decoration:none;font:600 14px/1 var(--f-head);letter-spacing:.22em;text-transform:uppercase;color:var(--grey);transition:color .2s}
+.nav ul a:hover{color:var(--white)}
+@media (max-width:700px){.nav ul{gap:16px}.nav ul li:nth-child(n+3){display:none}.nav .mark span{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:min(92svh,980px);display:grid;place-items:center;overflow:hidden;isolation:isolate}
+.hero .topo{position:absolute;inset:-4%;z-index:-2;background:url("assets/topography-5m.svg") center 40%/cover no-repeat;opacity:.95;animation:drift 40s ease-in-out infinite alternate}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(60% 55% at 50% 46%,rgba(10,9,10,.55),rgba(10,9,10,0) 70%),
+  linear-gradient(180deg,rgba(10,9,10,.55) 0%,rgba(10,9,10,0) 22%,rgba(10,9,10,0) 62%,var(--black) 100%)}
+@keyframes drift{from{transform:scale(1) translate(0,0)}to{transform:scale(1.06) translate(-1.5%,-1%)}}
+.hero-in{display:grid;justify-items:center;gap:26px;padding:110px 20px 70px;text-align:center}
+.hero-in img{width:min(500px,78vw);height:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.65));animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+.hero-in .label{color:var(--white);font-size:14px;letter-spacing:.42em;animation:rise 1s .15s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:.15;transform:translateY(14px)}to{opacity:1;transform:none}}
+.scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:1px;height:46px;background:linear-gradient(var(--white),transparent);opacity:.5}
+.sponsor-tag{display:inline-flex;align-items:center;gap:12px;text-decoration:none;padding:9px 18px 9px 10px;border:1px solid rgba(247,244,246,.22);border-radius:999px;background:rgba(10,9,10,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font:600 13px/1.2 var(--f-head);letter-spacing:.2em;text-transform:uppercase;color:var(--grey);transition:border-color .2s,color .2s;animation:rise 1s .3s cubic-bezier(.2,.8,.2,1) both}
+.sponsor-tag b{color:var(--white);font-weight:700}
+.sponsor-tag:hover{border-color:var(--plum-lt);color:var(--white)}
+.sponsor-tag img{width:34px;height:34px;flex:none}
+@media (max-width:520px){.hero-in .label{font-size:12px;letter-spacing:.28em}.sponsor-tag{font-size:11px;letter-spacing:.14em}}
+@media (prefers-reduced-motion:reduce){.hero .topo,.hero-in img,.hero-in .label,.sponsor-tag{animation:none}html{scroll-behavior:auto}}
+
+/* sections */
+section{padding-block:clamp(72px,10vw,128px);border-top:1px solid var(--hair)}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(36px,5vw,56px)}
+h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;letter-spacing:.01em;margin:10px 0 0;text-wrap:balance}
+.head p{margin:0;color:var(--grey);max-width:34em}
+
+/* fixtures: one block per matchday, three slots each (play / ref / play) */
+.sum{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0;color:var(--grey);font:600 14px/1 var(--f-head);letter-spacing:.2em;text-transform:uppercase}
+.sum b{color:var(--white);font-weight:700}
+.days{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair)}
+.day{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding:30px 4px;border-bottom:1px solid var(--hair)}
+.day .when{min-width:0}
+.day .dow{font:600 14px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--plum-lt)}
+.day .date{font:700 36px/1 var(--f-head);letter-spacing:.01em;text-transform:uppercase;margin:6px 0 10px}
+.day .where{font:600 17px/1.3 var(--f-head);letter-spacing:.06em;text-transform:uppercase}
+.day .doors{color:var(--grey);font-size:14px;margin-top:4px;font-variant-numeric:tabular-nums}
+.next{display:inline-block;margin-top:12px;font:700 12px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;background:var(--plum);color:#fff;padding:7px 10px;border-radius:3px}
+.slots{list-style:none;margin:0;padding:0;display:grid;gap:2px;min-width:0}
+.slot{display:grid;grid-template-columns:62px 56px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 16px;background:rgba(247,244,246,.035);border-radius:6px}
+.slot .tag{font:700 12px/1 var(--f-head);letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:7px 0;border-radius:3px;background:var(--plum);color:#fff}
+.slot .tm{font:600 17px/1 var(--f-head);letter-spacing:.04em;color:var(--grey);font-variant-numeric:tabular-nums}
+.slot .m{font:700 clamp(18px,2vw,23px)/1.15 var(--f-head);text-transform:uppercase;letter-spacing:.02em;min-width:0}
+.slot .m em{font-style:normal;color:var(--plum-lt);padding:0 .35em;font-weight:500}
+.slot .m .us{color:var(--white)}
+.slot .res{font:700 18px/1 var(--f-head);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.slot.ref{background:transparent;border:1px dashed var(--hair)}
+.slot.ref .tag{background:transparent;color:var(--grey);box-shadow:inset 0 0 0 1px rgba(247,244,246,.25)}
+.slot.ref .m{font-weight:500;color:var(--grey)}
+.slot.ref .res{font:600 12px/1 var(--f-head);letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.day.past{opacity:.6}
+@media (max-width:820px){.day{grid-template-columns:1fr;gap:16px;padding:24px 2px}.day .date{font-size:30px}}
+@media (max-width:520px){.slot{grid-template-columns:52px minmax(0,1fr) auto;gap:4px 12px;padding:12px}.slot .tm{grid-column:1;grid-row:2;font-size:14px}.slot .tag{grid-row:1}.slot .m{grid-column:2/-1;grid-row:1/3}.slot .res{grid-column:2/-1;grid-row:3}}
+.empty{color:var(--grey);padding:26px 4px;border-bottom:1px solid var(--hair)}
+.played-h{margin:64px 0 18px}
+
+/* kit */
+.kit{position:relative;overflow:hidden;isolation:isolate}
+.kit .bg{position:absolute;inset:0;z-index:-1;background:url("assets/topography-5m.svg") center/cover no-repeat;opacity:.16}
+.kit .shirts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,4vw,56px);align-items:end}
+.kit figure{margin:0;text-align:center}
+.kit img{width:100%;max-width:470px;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.7))}
+.kit figcaption{margin-top:14px;font:600 13px/1 var(--f-head);letter-spacing:.32em;text-transform:uppercase;color:var(--grey)}
+.specs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:clamp(40px,6vw,64px) 0 0;border-top:1px solid var(--hair);padding-top:28px}
+.specs div{min-width:0}
+.specs dt{font:600 12px/1 var(--f-head);letter-spacing:.3em;text-transform:uppercase;color:var(--plum-lt);margin-bottom:10px}
+.specs dd{margin:0;font:600 19px/1.35 var(--f-head);letter-spacing:.03em}
+.specs a{text-decoration:none;border-bottom:1px solid var(--plum-lt)}.specs a:hover{color:var(--plum-lt)}
+@media (max-width:900px){.specs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* partners */
+.partners{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+.partner{background:var(--black);padding:clamp(28px,4vw,48px);display:grid;gap:22px;align-content:start;min-width:0;text-decoration:none;transition:background .25s}
+a.partner:hover{background:var(--raise)}
+.partner.principal{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,64px)}
+.partner .logo{display:flex;align-items:center;gap:22px;min-height:72px;flex-wrap:wrap}
+.partner .logo img{height:auto;max-width:100%}
+.partner h3{font:700 26px/1.1 var(--f-head);letter-spacing:.04em;text-transform:uppercase;margin:8px 0 0}
+.partner p{margin:8px 0 0;color:var(--grey);font-size:15px}
+.partner .go{font:600 13px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--plum-lt);margin-top:16px;display:inline-block}
+.partner.wide{grid-column:1/-1}
+.partner h3{font-size:clamp(28px,3vw,38px)}
+@media (max-width:760px){.partners{grid-template-columns:1fr}.partner.principal{grid-template-columns:1fr}}
+
+/* instagram */
+.ig-follow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:clamp(28px,4vw,44px);border:1px solid var(--hair);text-decoration:none;transition:background .25s}
+.ig-follow:hover{background:var(--raise)}
+.ig-follow span{font:700 clamp(28px,4vw,44px)/1 var(--f-head);letter-spacing:.02em;min-width:0;overflow-wrap:anywhere}
+.ig-follow b{font:600 13px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--plum-lt)}
+
+.ig-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:6px}
+.ig-post,.ig-ph{position:relative;display:block;aspect-ratio:1;max-width:100%;overflow:hidden;background:var(--raise)}
+.ig-post img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .3s}
+.ig-post:hover img{transform:scale(1.05);filter:brightness(.8)}
+.ig-kind{position:absolute;top:10px;right:10px;font:700 11px/1 var(--f-head);font-style:normal;letter-spacing:.2em;text-transform:uppercase;background:rgba(10,9,10,.7);color:var(--white);padding:6px 8px;border-radius:3px}
+@media (max-width:700px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.ig-post img{transition:none}}
+
+/* footer */
+footer{border-top:1px solid var(--hair);padding-block:56px calc(48px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:28px 48px;align-items:center}
+footer img{width:84px;height:auto}
+footer .links{display:flex;flex-wrap:wrap;gap:10px 32px;font:600 15px/1 var(--f-head);letter-spacing:.2em;text-transform:uppercase;min-width:0}
+footer .links a{text-decoration:none;color:var(--white);overflow-wrap:anywhere}
+footer .links a:hover{color:var(--plum-lt)}
+footer small{color:var(--grey);font-size:13px;letter-spacing:.06em}
+@media (max-width:700px){footer .wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="mark" href="#top"><img src="assets/jesters-logo-sm.png" alt="" width="120" height="118"><span>Bristol Jesters</span></a>
+    <ul>
+      <li><a href="#fixtures">Fixtures</a></li>
+      <li><a href="#kit">Kit</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="topo" aria-hidden="true"></div>
+    <div class="hero-in">
+      <img src="assets/jesters-logo.png" alt="Bristol Jesters" width="900" height="882">
+      <p class="label">Bristol &nbsp;·&nbsp; Volleyball &nbsp;·&nbsp; 2026/2027</p>
+      <a class="sponsor-tag" href="https://www.hopunionbrewery.co.uk/" target="_blank" rel="noopener"><img src="assets/hop-union-roundel.svg" alt="" width="34" height="34"><span>Officially sponsored by <b>Hop Union Brewery</b></span></a>
+    </div>
+    <div class="scroll" aria-hidden="true"></div>
+  </div>
+
+  <section id="fixtures"><div class="wrap">
+    <div class="head">
+      <div><p class="label">Season 2026/27 · Men's Division 1</p><h2>Fixtures</h2></div>
+      <p class="sum" id="fxSum"></p>
+    </div>
+    <div id="fixturesOut"></div>
+  </div></section>
+
+  <section id="kit" class="kit"><div class="bg" aria-hidden="true"></div><div class="wrap">
+    <div class="head">
+      <div><p class="label">Home kit 2026/27</p><h2>The kit</h2></div>
+      <p>The pattern is Bristol's topography in 5&nbsp;m contours, showing just how hilly our city is.</p>
+    </div>
+    <div class="shirts">
+      <figure><img src="assets/kit-front.webp" alt="Front of the Bristol Jesters home shirt" width="733" height="900" loading="lazy"><figcaption>Front</figcaption></figure>
+      <figure><img src="assets/kit-back.webp" alt="Back of the Bristol Jesters home shirt" width="707" height="900" loading="lazy"><figcaption>Back</figcaption></figure>
+    </div>
+    <dl class="specs">
+      <div><dt>Pattern</dt><dd>Bristol, 5&nbsp;m contours</dd></div>
+      <div><dt>Colours</dt><dd>Black &amp; plum</dd></div>
+      <div><dt>Made by</dt><dd>Spized</dd></div>
+      <div><dt>Logo by</dt><dd><a href="https://www.instagram.com/bennettmadeit/" target="_blank" rel="noopener">@bennettmadeit</a></dd></div>
+    </dl>
+  </div></section>
+
+  <section id="partners"><div class="wrap">
+    <div class="head">
+      <div><p class="label">Official partners</p><h2>Partners</h2></div>
+    </div>
+    <div class="partners" id="partnersOut"></div>
+  </div></section>
+
+  <section id="instagram"><div class="wrap">
+    <div class="head"><div><p class="label" id="igLabel"></p><h2>Instagram</h2></div></div>
+    <div id="igOut"></div>
+  </div></section>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <img src="assets/jesters-logo-sm.png" alt="Bristol Jesters" width="120" height="118">
+  <div class="links">
+    <a class="mail" href="#"></a>
+    <a class="ig" href="#" target="_blank" rel="noopener"></a>
+  </div>
+  <small>© 2026 Bristol Jesters Volleyball Club · Logo by <a href="https://www.instagram.com/bennettmadeit/" target="_blank" rel="noopener">@bennettmadeit</a></small>
+</div></footer>
+
+<script>
+/* ======================================================
+   CLUB DETAILS: edit the text in quotes, save, re-upload.
+   ====================================================== */
+const CLUB = {
+  email: "hello@bristoljesters.co.uk",
+  instagram: "bristoljesters",
+
+  // Matchdays: three slots each, in order. Format: [time, team A, team B, result]
+  // A slot with Jesters in it is a game; a slot without us is our ref duty.
+  // Add results like "3–1 W" or "1–3 L" once played.
+  us: "Bristol Jesters",
+  matchdays: [
+    { date:"2026-10-10", venue:"Wellsway 2", doors:"13:00", finish:"16:30", slots:[
+      ["13:15","Bristol Jesters","UWE Men's 3",""], ["14:20","UWE Men's 3","Gloucester VC",""], ["15:25","Bristol Jesters","Gloucester VC",""] ]},
+    { date:"2026-10-31", venue:"Oasis PM", doors:"13:00", finish:"16:30", slots:[
+      ["13:15","Cardiff Wildcats","Bristol Jesters",""], ["14:20","Cardiff Wildcats","Bath Men's 4s",""], ["15:25","Bristol Jesters","Bath Men's 4s",""] ]},
+    { date:"2026-11-21", venue:"St Bernadettes PM", doors:"13:00", finish:"16:30", slots:[
+      ["13:15","Bristol Jesters","CoB Mens",""], ["14:20","Bedminster VC","CoB Mens",""], ["15:25","Bedminster VC","Bristol Jesters",""] ]},
+    { date:"2026-11-28", venue:"St Bernadettes AM", doors:"09:15", finish:"12:45", slots:[
+      ["09:45","Cardiff Wildcats","Bristol Jesters",""], ["10:50","Bristol Jesters","Bath Men's 4s",""], ["11:55","Cardiff Wildcats","Bath Men's 4s",""] ]},
+    { date:"2027-02-06", venue:"Wellsway 2", doors:"13:00", finish:"16:30", slots:[
+      ["13:15","UWE Men's 3","Gloucester VC",""], ["14:20","Bristol Jesters","UWE Men's 3",""], ["15:25","Bristol Jesters","Gloucester VC",""] ]},
+    { date:"2027-03-06", venue:"St Bernadettes PM", doors:"13:00", finish:"16:30", slots:[
+      ["13:15","Bedminster VC","CoB Mens",""], ["14:20","Bedminster VC","Bristol Jesters",""], ["15:25","Bristol Jesters","CoB Mens",""] ]},
+    { date:"2027-03-20", venue:"Wellsway 2", doors:"13:00", finish:"16:30", slots:[
+      ["13:15","Bath Men's 3","Bristol Jesters",""], ["14:20","Bristol Jesters","Bristol VC Men's 4",""], ["15:25","Bath Men's 3","Bristol VC Men's 4",""] ]},
+    { date:"2027-04-17", venue:"St Bernadettes PM", doors:"13:00", finish:"16:30", slots:[
+      ["13:15","Bath Men's 3","Bristol VC Men's 4",""], ["14:20","Bath Men's 3","Bristol Jesters",""], ["15:25","Bristol Jesters","Bristol VC Men's 4",""] ]}
+  ],
+
+  // Partners: the first one is shown large as the principal partner
+  partners: [
+    { name: "Hop Union Brewery", role: "Principal Partner", text: "Independent brewery in Brislington, Bristol. Front-of-shirt sponsor.",
+      url: "https://www.hopunionbrewery.co.uk/", logo: "assets/hop-union-roundel.svg", wordmark: "assets/hop-union-wordmark.svg" },
+    { name: "Spized", role: "Official Kit Supplier", text: "",
+      url: "", logo: "", wordmark: "" }
+  ],
+
+  // Instagram feed (Behold JSON feed URL). Leave "" to show a Follow button instead.
+  instagramFeed: "https://feeds.behold.so/vRMPB6i870GIc66vIIH3",
+  instagramPosts: 8
+};
+/* ====================================================== */
+
+(function(){
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const igUrl = "https://www.instagram.com/" + CLUB.instagram + "/";
+
+  const nav = document.getElementById("nav");
+  const onScroll = () => nav.classList.toggle("solid", window.scrollY > 40);
+  onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+
+  document.querySelectorAll(".mail").forEach(a => { a.href = "mailto:" + CLUB.email; a.textContent = CLUB.email; });
+  document.querySelectorAll(".ig").forEach(a => { a.href = igUrl; a.textContent = "Instagram"; });
+
+  // fixtures
+  const US = CLUB.us;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const parse = d => new Date(d + "T12:00:00");
+  const team = n => n === US ? `<span class="us">Jesters</span>` : esc(n);
+  const slot = ([tm, a, b, res]) => {
+    const play = a === US || b === US;
+    return `<li class="slot${play ? "" : " ref"}"><span class="tag">${play ? "Play" : "Ref"}</span><span class="tm">${esc(tm)}</span>`
+      + `<span class="m">${team(a)}<em>v</em>${team(b)}</span>`
+      + `<span class="res">${play ? esc(res) : "On duty"}</span></li>`;
+  };
+  const day = (md, isNext, past) => {
+    const d = parse(md.date);
+    return `<li class="day${past ? " past" : ""}"><div class="when">`
+      + `<div class="dow">${d.toLocaleDateString("en-GB",{weekday:"long"})}</div>`
+      + `<div class="date">${d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year: d.getFullYear() !== 2026 ? "numeric" : undefined})}</div>`
+      + `<div class="where">${esc(md.venue)}</div><div class="doors">Doors ${esc(md.doors)} · Finish ${esc(md.finish)}</div>`
+      + `${isNext ? `<span class="next">Next up</span>` : ""}</div>`
+      + `<ul class="slots">${md.slots.map(slot).join("")}</ul></li>`;
+  };
+  const mds = [...CLUB.matchdays].sort((a,b) => parse(a.date) - parse(b.date));
+  const up = mds.filter(m => parse(m.date) >= today), done = mds.filter(m => parse(m.date) < today).reverse();
+  let games = 0, refs = 0;
+  mds.forEach(m => m.slots.forEach(([,a,b]) => (a === US || b === US) ? games++ : refs++));
+  document.getElementById("fxSum").innerHTML = `<span><b>${mds.length}</b> matchdays</span><span><b>${games}</b> games</span><span><b>${refs}</b> ref duties</span>`;
+  let fx = up.length ? `<ul class="days">${up.map((m,i) => day(m, i === 0, false)).join("")}</ul>` : `<p class="empty">No more matchdays this season.</p>`;
+  if (done.length) fx += `<p class="label played-h">Played</p><ul class="days">${done.map(m => day(m, false, true)).join("")}</ul>`;
+  document.getElementById("fixturesOut").innerHTML = fx;
+
+  // partners
+  document.getElementById("partnersOut").innerHTML = CLUB.partners.map((p,i) => {
+    const tag = p.url ? "a" : "div";
+    const href = p.url ? ` href="${esc(p.url)}" target="_blank" rel="noopener"` : "";
+    const logo = (p.logo || p.wordmark)
+      ? `<div class="logo">${p.logo ? `<img src="${esc(p.logo)}" alt="" style="width:${i?72:120}px">` : ""}${p.wordmark ? `<img src="${esc(p.wordmark)}" alt="${esc(p.name)}" style="width:${i?160:240}px">` : ""}</div>`
+      : "";
+    const rest = CLUB.partners.length - 1;
+    const wide = i > 0 && i === CLUB.partners.length - 1 && rest % 2 === 1;
+    const title = p.wordmark ? "" : `<h3>${esc(p.name)}</h3>`;
+    return `<${tag} class="partner${i===0?" principal":""}${wide?" wide":""}"${href}>${logo}<div><p class="label">${esc(p.role)}</p>${title}${p.text ? `<p>${esc(p.text)}</p>` : ""}${p.url?`<span class="go">Visit site →</span>`:""}</div></${tag}>`;
+  }).join("");
+
+  // instagram
+  const igOut = document.getElementById("igOut");
+  document.getElementById("igLabel").textContent = "@" + CLUB.instagram;
+  const follow = `<a class="ig-follow" href="${igUrl}" target="_blank" rel="noopener"><span>@${esc(CLUB.instagram)}</span><b>Follow on Instagram →</b></a>`;
+  if (!CLUB.instagramFeed) { igOut.innerHTML = follow; }
+  else {
+    igOut.innerHTML = `<div class="ig-grid" aria-busy="true">${'<span class="ig-ph"></span>'.repeat(CLUB.instagramPosts)}</div>`;
+    fetch(CLUB.instagramFeed).then(r => { if (!r.ok) throw r.status; return r.json(); }).then(feed => {
+      const posts = (feed.posts || []).slice(0, CLUB.instagramPosts);
+      if (!posts.length) throw "empty";
+      const img = p => (p.sizes && (p.sizes.medium || p.sizes.small || p.sizes.large) || {}).mediaUrl || (p.mediaType === "VIDEO" ? p.thumbnailUrl : p.mediaUrl);
+      igOut.innerHTML = `<div class="ig-grid">${posts.map(p => {
+        const alt = esc((p.prunedCaption || p.caption || "Instagram post").slice(0, 120));
+        const icon = p.mediaType === "VIDEO" ? `<i class="ig-kind">${p.isReel ? "Reel" : "Video"}</i>` : p.mediaType === "CAROUSEL_ALBUM" ? `<i class="ig-kind">Gallery</i>` : "";
+        return `<a class="ig-post" href="${esc(p.permalink)}" target="_blank" rel="noopener"><img src="${esc(img(p))}" alt="${alt}" loading="lazy">${icon}</a>`;
+      }).join("")}</div>` + follow;
+    }).catch(() => { igOut.innerHTML = follow; });
+  }
+})();
+</script>
+</body>
+</html>
