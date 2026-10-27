@@ -33,6 +33,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--black)}
+.topo-all{position:fixed;inset:0;z-index:-5;pointer-events:none;background:url("assets/topography-5m.svg") center/cover no-repeat;opacity:.2}
 a{color:inherit}
 a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -54,7 +55,7 @@ a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radiu
 .hero .topo{position:absolute;inset:-4%;z-index:-2;background:url("assets/topography-5m.svg") center 40%/cover no-repeat;opacity:.95;animation:drift 40s ease-in-out infinite alternate}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
   radial-gradient(60% 55% at 50% 46%,rgba(10,9,10,.55),rgba(10,9,10,0) 70%),
-  linear-gradient(180deg,rgba(10,9,10,.55) 0%,rgba(10,9,10,0) 22%,rgba(10,9,10,0) 62%,var(--black) 100%)}
+  linear-gradient(180deg,rgba(10,9,10,.55) 0%,rgba(10,9,10,0) 22%,rgba(10,9,10,0) 60%,rgba(10,9,10,.8) 100%)}
 @keyframes drift{from{transform:scale(1) translate(0,0)}to{transform:scale(1.06) translate(-1.5%,-1%)}}
 .hero-in{display:grid;justify-items:center;gap:26px;padding:110px 20px 70px;text-align:center}
 .hero-in img{width:min(500px,78vw);height:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.65));animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
@@ -93,19 +94,23 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .slot .m em{font-style:normal;color:var(--plum-lt);padding:0 .35em;font-weight:500}
 .slot .m .us{color:var(--white)}
 .slot .res{font:700 18px/1 var(--f-head);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.slot .mvp{display:block;margin-top:5px;font:600 12px/1 var(--f-head);letter-spacing:.22em;color:var(--plum-lt)}
+.slot .mvp .sets{color:var(--grey);letter-spacing:.06em;font-variant-numeric:tabular-nums;margin-right:16px}
+.slot .mvp b{color:var(--white);letter-spacing:.08em;font-weight:700;margin-left:4px}
+.slot .res.win{font:700 13px/1 var(--f-head);letter-spacing:.22em;background:var(--plum);color:#fff;padding:7px 12px;border-radius:3px}
+.slot .res.loss{font:700 13px/1 var(--f-head);letter-spacing:.22em;color:var(--grey);box-shadow:inset 0 0 0 1px rgba(247,244,246,.25);padding:7px 12px;border-radius:3px}
 .slot.ref{background:transparent;border:1px dashed var(--hair)}
 .slot.ref .tag{background:transparent;color:var(--grey);box-shadow:inset 0 0 0 1px rgba(247,244,246,.25)}
 .slot.ref .m{font-weight:500;color:var(--grey)}
 .slot.ref .res{font:600 12px/1 var(--f-head);letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
-.day.past{opacity:.6}
+.day.past .when{opacity:.7}
 @media (max-width:820px){.day{grid-template-columns:1fr;gap:16px;padding:24px 2px}.day .date{font-size:30px}}
-@media (max-width:520px){.slot{grid-template-columns:52px minmax(0,1fr) auto;gap:4px 12px;padding:12px}.slot .tm{grid-column:1;grid-row:2;font-size:14px}.slot .tag{grid-row:1}.slot .m{grid-column:2/-1;grid-row:1/3}.slot .res{grid-column:2/-1;grid-row:3}}
+@media (max-width:520px){.slot{grid-template-columns:52px minmax(0,1fr) auto;gap:4px 12px;padding:12px}.slot .tm{grid-column:1;grid-row:2;font-size:14px}.slot .tag{grid-row:1}.slot .m{grid-column:2/-1;grid-row:1/3}.slot .res{grid-column:2/-1;grid-row:3;justify-self:start}}
 .empty{color:var(--grey);padding:26px 4px;border-bottom:1px solid var(--hair)}
 .played-h{margin:64px 0 18px}
 
 /* kit */
 .kit{position:relative;overflow:hidden;isolation:isolate}
-.kit .bg{position:absolute;inset:0;z-index:-1;background:url("assets/topography-5m.svg") center/cover no-repeat;opacity:.16}
 .kit .shirts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,4vw,56px);align-items:end}
 .kit figure{margin:0;text-align:center}
 .kit img{width:100%;max-width:470px;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.7))}
@@ -118,9 +123,9 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 @media (max-width:900px){.specs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* partners */
-.partners{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
-.partner{background:var(--black);padding:clamp(28px,4vw,48px);display:grid;gap:22px;align-content:start;min-width:0;text-decoration:none;transition:background .25s}
-a.partner:hover{background:var(--raise)}
+.partners{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(247,244,246,.06);border:1px solid var(--hair)}
+.partner{background:rgba(10,9,10,.72);padding:clamp(28px,4vw,48px);display:grid;gap:22px;align-content:start;min-width:0;text-decoration:none;transition:background .25s}
+a.partner:hover{background:rgba(20,17,19,.9)}
 .partner.principal{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,64px)}
 .partner .logo{display:flex;align-items:center;gap:22px;min-height:72px;flex-wrap:wrap}
 .partner .logo img{height:auto;max-width:100%}
@@ -133,7 +138,7 @@ a.partner:hover{background:var(--raise)}
 
 /* instagram */
 .ig-follow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:clamp(28px,4vw,44px);border:1px solid var(--hair);text-decoration:none;transition:background .25s}
-.ig-follow:hover{background:var(--raise)}
+.ig-follow{background:rgba(10,9,10,.6)}.ig-follow:hover{background:rgba(20,17,19,.9)}
 .ig-follow span{font:700 clamp(28px,4vw,44px)/1 var(--f-head);letter-spacing:.02em;min-width:0;overflow-wrap:anywhere}
 .ig-follow b{font:600 13px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--plum-lt)}
 
@@ -158,6 +163,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em}
 </head>
 <body>
 
+<div class="topo-all" aria-hidden="true"></div>
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="mark" href="#top"><img src="assets/jesters-logo-sm.png" alt="" width="120" height="118"><span>Bristol Jesters</span></a>
@@ -189,7 +195,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em}
     <div id="fixturesOut"></div>
   </div></section>
 
-  <section id="kit" class="kit"><div class="bg" aria-hidden="true"></div><div class="wrap">
+  <section id="kit" class="kit"><div class="wrap">
     <div class="head">
       <div><p class="label">Home kit 2026/27</p><h2>The kit</h2></div>
       <p>The pattern is Bristol's topography in 5&nbsp;m contours, showing just how hilly our city is.</p>
@@ -236,13 +242,13 @@ const CLUB = {
   email: "hello@bristoljesters.co.uk",
   instagram: "bristoljesters",
 
-  // Matchdays: three slots each, in order. Format: [time, team A, team B, result]
+  // Matchdays: three slots each, in order. Format: [time, team A, team B, result, MVP, set scores (Jesters first)]
   // A slot with Jesters in it is a game; a slot without us is our ref duty.
-  // Add results like "3–1 W" or "1–3 L" once played.
+  // Once played, add the result ("WIN" / "LOSS", or a score) and the MVP's name.
   us: "Bristol Jesters",
   matchdays: [
     { date:"2026-10-10", venue:"Wellsway 2", doors:"13:00", finish:"16:30", slots:[
-      ["13:15","Bristol Jesters","UWE Men's 3",""], ["14:20","UWE Men's 3","Gloucester VC",""], ["15:25","Bristol Jesters","Gloucester VC",""] ]},
+      ["13:15","Bristol Jesters","UWE Men's 3","WIN 2–1","Ben Hamilton","20–25, 25–15, 15–5"], ["14:20","UWE Men's 3","Gloucester VC",""], ["15:25","Bristol Jesters","Gloucester VC","WIN 2–1","Alfie Hamblin","20–25, 25–20, 15–6"] ]},
     { date:"2026-10-31", venue:"Oasis PM", doors:"13:00", finish:"16:30", slots:[
       ["13:15","Cardiff Wildcats","Bristol Jesters",""], ["14:20","Cardiff Wildcats","Bath Men's 4s",""], ["15:25","Bristol Jesters","Bath Men's 4s",""] ]},
     { date:"2026-11-21", venue:"St Bernadettes PM", doors:"13:00", finish:"16:30", slots:[
@@ -289,11 +295,11 @@ const CLUB = {
   const today = new Date(); today.setHours(0,0,0,0);
   const parse = d => new Date(d + "T12:00:00");
   const team = n => n === US ? `<span class="us">Jesters</span>` : esc(n);
-  const slot = ([tm, a, b, res]) => {
+  const slot = ([tm, a, b, res, mvp, sets]) => {
     const play = a === US || b === US;
     return `<li class="slot${play ? "" : " ref"}"><span class="tag">${play ? "Play" : "Ref"}</span><span class="tm">${esc(tm)}</span>`
-      + `<span class="m">${team(a)}<em>v</em>${team(b)}</span>`
-      + `<span class="res">${play ? esc(res) : "On duty"}</span></li>`;
+      + `<span class="m">${team(a)}<em>v</em>${team(b)}${play && (mvp || sets) ? `<small class="mvp">${sets ? `<span class="sets">${esc(sets).split(", ").join(" · ")}</span>` : ""}${mvp ? `MVP <b>${esc(mvp)}</b>` : ""}</small>` : ""}</span>`
+      + `<span class="res${/^win/i.test(res) ? " win" : /^loss|^lost/i.test(res) ? " loss" : ""}">${play ? esc(res) : ""}</span></li>`;
   };
   const day = (md, isNext, past) => {
     const d = parse(md.date);
