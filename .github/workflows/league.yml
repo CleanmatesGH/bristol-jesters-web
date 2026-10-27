@@ -1,0 +1,35 @@
+name: Update league table
+
+on:
+  schedule:
+    - cron: "15 */6 * * *"         # every 6 hours
+    - cron: "*/30 12-22 * * 6"     # Saturdays, every 30 min from 12:00 to 22:30 UTC (match days)
+  workflow_dispatch:                # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: league-table
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch BADVA table
+        run: python3 scripts/scrape_league.py
+
+      - name: Commit if the table changed
+        run: |
+          if [ -n "$(git status --porcelain data/)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/league.json
+            git commit -m "Update league table"
+            git push
+          else
+            echo "No change"
+          fi
