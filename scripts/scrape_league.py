@@ -1,10 +1,16 @@
-"""Fetch the BADVA league table and save Men's Division 1 to data/league.json.
+"""Fetch BADVA data for the website.
+
+- League table (Men's Division 1) -> data/league.json
+- Bristol Jesters match results (scores and set scores) -> data/results.json
+
 
 Runs on a schedule in GitHub Actions (see .github/workflows/league.yml).
 Standard library only. The file is only rewritten when the table changes,
 and nothing is written if the page can't be read or parsed.
 """
 import json
+import re
+import urllib.parse
 import os
 import sys
 import urllib.request
@@ -14,6 +20,11 @@ from html.parser import HTMLParser
 SOURCE = "https://badva.org.uk/scripts/table.php"
 DIVISION = "Mens Team - Division 1"
 OUT = os.path.join(os.path.dirname(__file__), "..", "data", "league.json")
+FIXTURES = "https://badva.org.uk/scripts/fixtures.php?fieldset=FFFFFF&team=&outside=0"
+SEASON = "2026/27"
+TEAM_ID = "547"   # Bristol Jesters on BADVA
+RESULTS_OUT = os.path.join(os.path.dirname(__file__), "..", "data", "results.json")
+UA = {"User-Agent": "BristolJestersSite/1.0 (+https://bristoljesters.co.uk)"}
 
 
 class TableParser(HTMLParser):
@@ -85,37 +96,101 @@ def parse(html):
     return teams
 
 
-def main():
-    req = urllib.request.Request(SOURCE, headers={"User-Agent": "BristolJestersSite/1.0 (+https://bristoljesters.co.uk)"})
+class RowParser(HTMLParser):
+    """Collects the text of every table cell, row by row."""
+
+    def __init__(self):
+        super().__init__()
+        self.rows, self.row, self.cell = [], None, None
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "tr":
+            self.row = []
+        elif tag == "td" and self.row is not None:
+            self.cell = ""
+
+    def handle_endtag(self, tag):
+        if tag == "td" and self.cell is not None:
+            self.row.append(" ".join(self.cell.split()))
+            self.cell = None
+        elif tag == "tr" and self.row is not None:
+            self.rows.append(self.row)
+            self.row = None
+
+    def handle_data(self, data):
+        if self.cell is not None:
+            self.cell += data
+
+
+MATCH = re.compile(r"^MnD1-0*(\d+)\s+(.+?)\s+vs\.\s+(.+)$")
+SETS = re.compile(r"(\d+)\s*:\s*(\d+)")
+
+
+def parse_results(html):
+    p = RowParser()
+    p.feed(html)
+    out = {}
+    for r in p.rows:
+        if len(r) < 3:
+            continue
+        m = MATCH.match(r[0])
+        if not m:
+            continue
+        code, home, away = m.group(1), m.group(2).strip(), m.group(3).strip()
+        inner = r[2][r[2].find("(") + 1:r[2].rfind(")")] if "(" in r[2] else ""
+        sets = [[int(a), int(b)] for a, b in SETS.findall(inner)]
+        if not sets:
+            continue  # not played yet (shown as 0:0)
+        out[code] = {"home": home, "away": away, "ref": r[1].replace("ref:", "").strip(), "sets": sets}
+    return out
+
+
+def fetch(url, data=None):
+    body = urllib.parse.urlencode(data).encode() if data else None
+    req = urllib.request.Request(url, data=body, headers=UA)
     with urllib.request.urlopen(req, timeout=30) as resp:
-        html = resp.read().decode("utf-8", errors="replace")
-    teams = parse(html)
+        return resp.read().decode("utf-8", errors="replace")
 
+
+def save(path, key, value, extra):
     old = None
-    if os.path.exists(OUT):
-        with open(OUT, encoding="utf-8") as f:
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
             old = json.load(f)
-    if old and old.get("teams") == teams:
-        print("No change")
-        return
-
-    data = {
-        "division": "Men's Division 1",
-        "season": "2026/27",
-        "source": "https://badva.org.uk/",
-        "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "teams": teams,
-    }
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
+    if old and old.get(key) == value:
+        return False
+    data = dict(extra)
+    data["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    data[key] = value
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
         f.write("\n")
-    print(f"Updated: {len(teams)} teams")
+    return True
+
+
+def update_table():
+    teams = parse(fetch(SOURCE))
+    changed = save(OUT, "teams", teams, {"division": "Men's Division 1", "season": SEASON, "source": "https://badva.org.uk/"})
+    print("League table:", "updated" if changed else "no change", f"({len(teams)} teams)")
+
+
+def update_results():
+    results = parse_results(fetch(FIXTURES, {"cSeason": SEASON, "cTeam": TEAM_ID}))
+    changed = save(RESULTS_OUT, "matches", results, {"team": "Bristol Jesters", "season": SEASON, "source": "https://badva.org.uk/fixtures.html"})
+    print("Results:", "updated" if changed else "no change", f"({len(results)} played)")
+
+
+def main():
+    failed = 0
+    for job in (update_table, update_results):
+        try:
+            job()
+        except Exception as e:  # keep the existing file for this job
+            failed += 1
+            print(f"{job.__name__} failed: {e}", file=sys.stderr)
+    sys.exit(1 if failed == 2 else 0)
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:  # leave the existing file untouched
-        print(f"League update failed: {e}", file=sys.stderr)
-        sys.exit(1)
+    main()

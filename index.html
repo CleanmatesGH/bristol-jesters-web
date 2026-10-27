@@ -152,6 +152,16 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .slot .m .tn{white-space:nowrap}
 @media (max-width:520px){.slot .m{display:flex;flex-direction:column;gap:6px}.slot .m>em{display:none}.slot .m .tn{display:flex;align-items:center;white-space:normal}.slot .m .badge,.slot .m .tn.r .badge{width:22px;height:22px;margin:0 8px 0 0;vertical-align:0;order:-1}.slot .m .tn.r{justify-content:flex-start;text-align:left}.slot .m .mvp{text-align:left}.slot .m .mvp{margin-top:2px}}
 
+.then2{display:grid;justify-items:center;gap:12px;margin-top:22px}
+.then2 .lb{font:600 12px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--grey)}
+.then2 .lb b{color:var(--white);letter-spacing:.08em}
+.then2 .mu{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;font:700 clamp(15px,1.8vw,19px)/1.1 var(--f-head);text-transform:uppercase;letter-spacing:.03em}
+.then2 .tn{display:flex;align-items:center;gap:10px;min-width:0}
+.then2 .tn.r{justify-content:flex-end;text-align:right}
+.then2 em{font-style:normal;color:var(--plum-lt)}
+.then2 .badge{width:40px;height:40px}
+@media (max-width:520px){.then2 .badge{width:30px;height:30px}.then2 .mu{gap:8px;font-size:14px}.then2 .tn{gap:6px}}
+
 /* league table */
 .lt-wrap{overflow-x:auto;border-top:1px solid var(--hair)}
 .lt{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
@@ -171,9 +181,9 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .lt-foot a{color:var(--plum-lt);text-decoration:none}
 .lt-foot a:hover{color:var(--white)}
 #table .head{flex-wrap:nowrap}
-.standing{display:grid;justify-items:end;gap:8px;margin:0;text-align:right;flex:none}
-.standing b{font:700 clamp(40px,6vw,72px)/.8 var(--f-head);color:var(--white)}
-.standing b sup{font-size:.42em;vertical-align:top;position:relative;top:.12em;margin-left:2px;color:var(--plum-lt)}
+.standing{display:grid;justify-items:end;gap:0;margin:0;text-align:right;flex:none}
+.standing b{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);color:var(--white);margin-top:10px}
+.standing b sup{font-size:.4em;line-height:0;vertical-align:baseline;position:relative;top:-1.1em;margin-left:2px;color:var(--plum-lt)}
 .standing span{font:600 12px/1 var(--f-head);letter-spacing:.22em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
 @media (max-width:700px){.lt td.wide,.lt th.wide{display:none}.lt td{padding:15px 5px;font-size:16px}.lt th{padding:14px 5px;letter-spacing:.14em}.lt td.pts{font-size:20px;width:44px}.lt td.pos{width:30px}.lt td.tm{min-width:0;font-size:16px}.lt tr.us td.tm img{width:24px;margin-right:6px;vertical-align:-6px}}
 
@@ -325,24 +335,25 @@ const CLUB = {
 
   // Matchdays: three slots each, in order. Format: [time, team A, team B, result, MVP, set scores (Jesters first)]
   // A slot with Jesters in it is a game; a slot without us is our ref duty.
-  // Once played, add the result ("WIN" / "LOSS", or a score) and the MVP's name.
+  // Results and set scores fill in automatically from BADVA (data/results.json) using the match codes.
+  // Add the MVP's name by hand after each game.
   us: "Bristol Jesters",
   matchdays: [
-    { date:"2026-10-10", venue:"Wellsway 2", doors:"13:00", finish:"16:30", slots:[
+    { date:"2026-10-10", codes:[4,5,6], venue:"Wellsway", doors:"13:00", finish:"16:30", slots:[
       ["13:15","Bristol Jesters","UWE Men's 3","WIN 2–1","Ben Hamilton","20–25, 25–15, 15–5"], ["14:20","UWE Men's 3","Gloucester VC",""], ["15:25","Bristol Jesters","Gloucester VC","WIN 2–1","Alfie Hamblin","20–25, 25–20, 15–6"] ]},
-    { date:"2026-10-31", venue:"Oasis PM", doors:"13:00", finish:"16:30", slots:[
+    { date:"2026-10-31", codes:[10,11,12], venue:"Oasis", doors:"13:00", finish:"16:30", slots:[
       ["13:15","Cardiff Wildcats","Bristol Jesters",""], ["14:20","Cardiff Wildcats","Bath Men's 4s",""], ["15:25","Bristol Jesters","Bath Men's 4s",""] ]},
-    { date:"2026-11-21", venue:"St Bernadettes PM", doors:"13:00", finish:"16:30", slots:[
+    { date:"2026-11-21", codes:[28,29,30], venue:"St Bernadettes", doors:"13:00", finish:"16:30", slots:[
       ["13:15","Bristol Jesters","CoB Mens",""], ["14:20","Bedminster VC","CoB Mens",""], ["15:25","Bedminster VC","Bristol Jesters",""] ]},
-    { date:"2026-11-28", venue:"St Bernadettes AM", doors:"09:15", finish:"12:45", slots:[
+    { date:"2026-11-28", codes:[31,32,33], venue:"St Bernadettes", doors:"09:15", finish:"12:45", slots:[
       ["09:45","Cardiff Wildcats","Bristol Jesters",""], ["10:50","Bristol Jesters","Bath Men's 4s",""], ["11:55","Cardiff Wildcats","Bath Men's 4s",""] ]},
-    { date:"2027-02-06", venue:"Wellsway 2", doors:"13:00", finish:"16:30", slots:[
+    { date:"2027-02-06", codes:[40,41,42], venue:"Wellsway", doors:"13:00", finish:"16:30", slots:[
       ["13:15","UWE Men's 3","Gloucester VC",""], ["14:20","Bristol Jesters","UWE Men's 3",""], ["15:25","Bristol Jesters","Gloucester VC",""] ]},
-    { date:"2027-03-06", venue:"St Bernadettes PM", doors:"13:00", finish:"16:30", slots:[
+    { date:"2027-03-06", codes:[49,50,51], venue:"St Bernadettes", doors:"13:00", finish:"16:30", slots:[
       ["13:15","Bedminster VC","CoB Mens",""], ["14:20","Bedminster VC","Bristol Jesters",""], ["15:25","Bristol Jesters","CoB Mens",""] ]},
-    { date:"2027-03-20", venue:"Wellsway 2", doors:"13:00", finish:"16:30", slots:[
+    { date:"2027-03-20", codes:[58,59,60], venue:"Wellsway", doors:"13:00", finish:"16:30", slots:[
       ["13:15","Bath Men's 3","Bristol Jesters",""], ["14:20","Bristol Jesters","Bristol VC Men's 4",""], ["15:25","Bath Men's 3","Bristol VC Men's 4",""] ]},
-    { date:"2027-04-17", venue:"St Bernadettes PM", doors:"13:00", finish:"16:30", slots:[
+    { date:"2027-04-17", codes:[67,68,69], venue:"St Bernadettes", doors:"13:00", finish:"16:30", slots:[
       ["13:15","Bath Men's 3","Bristol VC Men's 4",""], ["14:20","Bath Men's 3","Bristol Jesters",""], ["15:25","Bristol Jesters","Bristol VC Men's 4",""] ]}
   ],
 
@@ -389,7 +400,16 @@ const CLUB = {
   const US = CLUB.us;
   const today = new Date(); today.setHours(0,0,0,0);
   const parse = d => new Date(d + "T12:00:00");
-  const team = (n, right) => { const name = n === US ? `<span class="us">Jesters</span>` : esc(n); return `<span class="tn${right ? " r" : ""}">${right ? name + plate(n) : plate(n) + name}</span>`; };
+  const team = (n, right) => { const name = n === US ? `<span class="us">Bristol Jesters</span>` : esc(n); return `<span class="tn${right ? " r" : ""}">${right ? name + plate(n) : plate(n) + name}</span>`; };
+  let RESULTS = {};
+  const withResult = (sl, code) => {
+    const r = RESULTS[code], [tm, a, b, , mvp] = sl;
+    if (!r || !r.sets || !r.sets.length || !(a === US || b === US)) return sl;
+    const usHome = /jesters/i.test(r.home);
+    const sets = r.sets.map(([h, w]) => usHome ? [h, w] : [w, h]);
+    const won = sets.filter(([x, y]) => x > y).length, lost = sets.length - won;
+    return [tm, a, b, `${won > lost ? "WIN" : "LOSS"} ${won}–${lost}`, mvp, sets.map(([x, y]) => `${x}–${y}`).join(", ")];
+  };
   const slot = ([tm, a, b, res, mvp, sets]) => {
     const play = a === US || b === US;
     return `<li class="slot${play ? "" : " ref"}"><span class="tag">${play ? "Play" : "Ref"}</span><span class="tm">${esc(tm)}</span>`
@@ -403,25 +423,30 @@ const CLUB = {
       + `<div class="date">${d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year: d.getFullYear() !== 2026 ? "numeric" : undefined})}</div>`
       + `<div class="where">${esc(md.venue)}</div><div class="doors">Doors ${esc(md.doors)} · Finish ${esc(md.finish)}</div>`
       + `${isNext ? `<span class="next">Next up</span>` : ""}</div>`
-      + `<ul class="slots">${md.slots.map(slot).join("")}</ul></li>`;
+      + `<ul class="slots">${md.slots.map((sl, i) => slot(withResult(sl, (md.codes || [])[i]))).join("")}</ul></li>`;
   };
   const mds = [...CLUB.matchdays].sort((a,b) => parse(a.date) - parse(b.date));
   const up = mds.filter(m => parse(m.date) >= today), done = mds.filter(m => parse(m.date) < today).reverse();
   let games = 0, refs = 0;
   mds.forEach(m => m.slots.forEach(([,a,b]) => (a === US || b === US) ? games++ : refs++));
   document.getElementById("fxSum").innerHTML = `<span><b>${mds.length}</b> matchdays</span><span><b>${games}</b> games</span><span><b>${refs}</b> ref duties</span>`;
-  const SHOW = 2, later = up.slice(SHOW);
-  let fx = up.length ? `<ul class="days">${up.slice(0, SHOW).map((m,i) => day(m, i === 0, false)).join("")}</ul>` : `<p class="empty">No more matchdays this season.</p>`;
-  let rest = later.length ? `<ul class="days" style="border-top:0">${later.map(m => day(m, false, false)).join("")}</ul>` : "";
-  if (done.length) rest += `<p class="label played-h">Played</p><ul class="days">${done.map(m => day(m, false, true)).join("")}</ul>`;
-  if (rest) {
-    const what = [later.length ? `${later.length} more matchday${later.length > 1 ? "s" : ""}` : "", done.length ? "results" : ""].filter(Boolean).join(" + ");
-    fx += `<div class="more" id="fxMore"><div>${rest}</div></div>`
-      + `<button class="toggle" id="fxToggle" type="button" aria-expanded="false" aria-controls="fxMore"><span class="ic" aria-hidden="true"></span><span class="lbl">Full season</span><small>${what}</small></button>`;
-  }
-  document.getElementById("fixturesOut").innerHTML = fx;
-  const tg = document.getElementById("fxToggle");
-  if (tg) tg.addEventListener("click", () => {
+  const renderFixtures = () => {
+    const wasOpen = document.getElementById("fxMore") && document.getElementById("fxMore").classList.contains("open");
+    const SHOW = 2, later = up.slice(SHOW);
+    let fx = up.length ? `<ul class="days">${up.slice(0, SHOW).map((m,i) => day(m, i === 0, false)).join("")}</ul>` : `<p class="empty">No more matchdays this season.</p>`;
+    let rest = later.length ? `<ul class="days" style="border-top:0">${later.map(m => day(m, false, false)).join("")}</ul>` : "";
+    if (done.length) rest += `<p class="label played-h">Played</p><ul class="days">${done.map(m => day(m, false, true)).join("")}</ul>`;
+    if (rest) {
+      const what = [later.length ? `${later.length} more matchday${later.length > 1 ? "s" : ""}` : "", done.length ? "results" : ""].filter(Boolean).join(" + ");
+      fx += `<div class="more" id="fxMore"><div>${rest}</div></div>`
+        + `<button class="toggle" id="fxToggle" type="button" aria-expanded="false" aria-controls="fxMore"><span class="ic" aria-hidden="true"></span><span class="lbl">Full season</span><small>${what}</small></button>`;
+    }
+    document.getElementById("fixturesOut").innerHTML = fx;
+    if (wasOpen) { document.getElementById("fxMore").classList.add("open"); const t = document.getElementById("fxToggle"); t.setAttribute("aria-expanded", "true"); t.querySelector(".lbl").textContent = "Show less"; t.querySelector("small").hidden = true; }
+  };
+  renderFixtures();
+  document.getElementById("fixturesOut").addEventListener("click", e => {
+    const tg = e.target.closest("#fxToggle"); if (!tg) return;
     const open = tg.getAttribute("aria-expanded") !== "true";
     tg.setAttribute("aria-expanded", open);
     document.getElementById("fxMore").classList.toggle("open", open);
@@ -441,7 +466,8 @@ const CLUB = {
     const days = Math.round((d - today) / 864e5) - 0;
     const when = days <= 0 ? "Today" : days === 1 ? "Tomorrow" : `In ${days} days`;
     const side = n => `<div class="side">${plate(n)}<b>${n === US ? "Bristol Jesters" : esc(n)}</b><small>${n === a ? "Home" : "Away"}</small></div>`;
-    const more = games.slice(1).map(([t, x, y]) => `<b>${esc(t)}</b> v ${esc(x === US ? y : x)}`).join(" · ");
+    const nm = n => n === US ? "Bristol Jesters" : esc(n);
+    const more = games.slice(1).map(([t, x, y]) => `<div class="then2"><span class="lb">Then <b>${esc(t)}</b></span><span class="mu"><span class="tn r">${nm(x)}${plate(x)}</span><em>v</em><span class="tn">${plate(y)}${nm(y)}</span></span></div>`).join("");
     document.getElementById("nextGame").innerHTML = `<div class="nextg">
       <p class="eyebrow"><i aria-hidden="true"></i>Next game</p>
       <div class="vs">${side(a)}<span class="v">V</span>${side(b)}</div>
@@ -451,9 +477,16 @@ const CLUB = {
         <div><dt>Venue</dt><dd>${esc(md.venue)}</dd></div>
         <div><dt>Doors</dt><dd>${esc(md.doors)}</dd></div>
       </dl>
-      ${more ? `<p class="then">Then ${more}</p>` : ""}
-      <p class="then" style="margin-top:6px"><span class="cd">${when}</span></p>
+      ${more}
+      <p class="then" style="margin-top:22px"><span class="cd">${when}</span></p>
     </div>`;
+  })();
+
+  // results: filled from BADVA by the same scheduled job (data/results.json)
+  (async () => {
+    for (const u of ["https://raw.githubusercontent.com/CleanmatesGH/bristol-jesters-web/main/data/results.json?v=" + Math.floor(Date.now() / 300000), "data/results.json"]) {
+      try { const d = await Promise.race([fetch(u, {cache: "no-store"}).then(r => { if (!r.ok) throw r.status; return r.json(); }), new Promise((_, no) => setTimeout(() => no("timeout"), 6000))]); if (d && d.matches) { RESULTS = d.matches; renderFixtures(); return; } } catch (e) {}
+    }
   })();
 
   // league table: refreshed from BADVA by a scheduled GitHub Action (scripts/scrape_league.py)
@@ -475,7 +508,7 @@ const CLUB = {
       + `<td>${t.setsFor}:${t.setsAgainst}</td><td class="wide">${t.pointsFor}:${t.pointsAgainst}</td>`
       + `<td class="pts">${t.pts}</td></tr>`).join("");
     const me = data.teams.find(t => isUs(t.team));
-    if (me) { const o = ordinal(me.pos); document.getElementById("ltStanding").innerHTML = `<b>${me.pos}<sup>${o.slice(String(me.pos).length)}</sup></b><span>${me.pts} pts · W${me.won} L${me.lost}</span>`; }
+    if (me) { const o = ordinal(me.pos); document.getElementById("ltStanding").innerHTML = `<span>${me.pts} pts · W${me.won} L${me.lost}</span><b>${me.pos}<sup>${o.slice(String(me.pos).length)}</sup></b>`; }
     if (data.updated) {
       const d = new Date(data.updated);
       document.getElementById("ltUpdated").textContent = "Updated " + d.toLocaleDateString("en-GB", {day: "numeric", month: "short"}) + ", " + d.toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit"});
