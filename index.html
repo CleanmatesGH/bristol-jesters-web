@@ -288,7 +288,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em;line-height:1
 
   <section id="kit" class="kit"><div class="wrap">
     <div class="head">
-      <div><p class="label">Home kit 2026/27</p><h2>The kit</h2></div>
+      <div><p class="label">Kit 2026/27</p><h2>The kit</h2></div>
       <p>The pattern is Bristol's topography in 5&nbsp;m contours, showing just how hilly our city is.</p>
     </div>
     <div class="shirts">
@@ -465,7 +465,7 @@ const CLUB = {
     const d = parse(md.date);
     const days = Math.round((d - today) / 864e5) - 0;
     const when = days <= 0 ? "Today" : days === 1 ? "Tomorrow" : `In ${days} days`;
-    const side = n => `<div class="side">${plate(n)}<b>${n === US ? "Bristol Jesters" : esc(n)}</b><small>${n === a ? "Home" : "Away"}</small></div>`;
+    const side = n => `<div class="side">${plate(n)}<b>${n === US ? "Bristol Jesters" : esc(n)}</b></div>`;
     const nm = n => n === US ? "Bristol Jesters" : esc(n);
     const more = games.slice(1).map(([t, x, y]) => `<div class="then2"><span class="lb">Then <b>${esc(t)}</b></span><span class="mu"><span class="tn r">${nm(x)}${plate(x)}</span><em>v</em><span class="tn">${plate(y)}${nm(y)}</span></span></div>`).join("");
     document.getElementById("nextGame").innerHTML = `<div class="nextg">
