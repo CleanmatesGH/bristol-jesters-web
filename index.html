@@ -54,10 +54,10 @@ a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radiu
 
 /* hero */
 .hero{position:relative;min-height:min(92svh,980px);display:grid;place-items:center;overflow:hidden;isolation:isolate}
-.hero .topo{position:absolute;inset:-4%;z-index:-2;background:url("assets/topography-5m.svg") center 40%/cover no-repeat;opacity:.95;animation:drift 40s ease-in-out infinite alternate}
+.hero .topo{position:absolute;inset:-4%;z-index:-2;background:url("assets/topography-5m.svg") center 40%/cover no-repeat;opacity:.95;animation:drift 40s ease-in-out infinite alternate;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
   radial-gradient(60% 55% at 50% 46%,rgba(10,9,10,.55),rgba(10,9,10,0) 70%),
-  linear-gradient(180deg,rgba(10,9,10,.55) 0%,rgba(10,9,10,0) 22%,rgba(10,9,10,0) 60%,rgba(10,9,10,.8) 100%)}
+  linear-gradient(180deg,rgba(10,9,10,.55) 0%,rgba(10,9,10,0) 22%)}
 @keyframes drift{from{transform:scale(1) translate(0,0)}to{transform:scale(1.06) translate(-1.5%,-1%)}}
 .hero-in{display:grid;justify-items:center;gap:26px;padding:110px 20px 70px;text-align:center}
 .hero-in img{width:min(500px,78vw);height:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.65));animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
@@ -73,6 +73,7 @@ a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radiu
 
 /* sections */
 section{padding-block:clamp(72px,10vw,128px);border-top:1px solid var(--hair)}
+#fixtures{border-top:0}
 .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(36px,5vw,56px)}
 h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;letter-spacing:.01em;margin:10px 0 0;text-wrap:balance}
 .head p{margin:0;color:var(--grey);max-width:34em}
@@ -262,7 +263,6 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em;line-height:1
       <p class="label">Bristol &nbsp;·&nbsp; Volleyball &nbsp;·&nbsp; 2026/2027</p>
       <a class="sponsor-tag" href="https://www.hopunionbrewery.co.uk/" target="_blank" rel="noopener"><img src="assets/hop-union-roundel.svg" alt="" width="34" height="34"><span>Officially sponsored by <b>Hop Union Brewery</b></span></a>
     </div>
-    <div class="scroll" aria-hidden="true"></div>
   </div>
 
   <section id="fixtures"><div class="wrap">
