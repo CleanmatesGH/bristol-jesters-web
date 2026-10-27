@@ -123,6 +123,34 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .toggle small{font:600 12px/1 var(--f-head);letter-spacing:.18em;color:var(--grey)}
 @media (prefers-reduced-motion:reduce){.more,.toggle .ic::before,.toggle .ic::after{transition:none}}
 
+/* next game */
+.nextg{position:relative;overflow:hidden;margin-bottom:clamp(40px,6vw,64px);padding:clamp(28px,4vw,48px) clamp(20px,4vw,48px);border:1px solid rgba(183,106,163,.35);border-radius:10px;background:radial-gradient(120% 140% at 50% 0%,rgba(122,52,104,.42),rgba(10,9,10,.82) 70%)}
+.nextg .eyebrow{display:flex;justify-content:center;align-items:center;gap:12px;margin:0 0 clamp(20px,3vw,32px);font:700 14px/1 var(--f-head);letter-spacing:.34em;text-transform:uppercase;color:var(--plum-lt)}
+.nextg .eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--plum-lt);box-shadow:0 0 0 0 rgba(183,106,163,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(183,106,163,0)}100%{box-shadow:0 0 0 0 rgba(183,106,163,0)}}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(12px,3vw,40px)}
+.side{display:grid;justify-items:center;gap:14px;text-align:center;min-width:0}
+.side b{font:700 clamp(18px,2.4vw,28px)/1.05 var(--f-head);text-transform:uppercase;letter-spacing:.03em;color:var(--white)}
+.side small{font:600 11px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--grey)}
+.vs .v{font:800 clamp(28px,4vw,48px)/1 var(--f-head);color:var(--plum-lt);letter-spacing:.04em}
+.plate{display:grid;place-items:center;border-radius:50%;background:#F5EFF3;box-shadow:0 14px 30px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.06);aspect-ratio:1}
+.plate img{width:78%;height:78%;object-fit:contain}
+.plate.us{background:radial-gradient(circle at 50% 40%,#2a1a25,#120c10);box-shadow:0 14px 30px rgba(0,0,0,.45),inset 0 0 0 2px var(--plum)}
+.plate.us img{width:84%;height:84%}
+.nextg .plate{width:clamp(96px,16vw,170px)}
+.nextg .info{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;margin-top:clamp(24px,3.5vw,36px);padding-top:clamp(20px,3vw,28px);border-top:1px solid var(--hair);text-align:center}
+.nextg .info div{display:grid;gap:7px}
+.nextg .info dt{font:600 11px/1 var(--f-head);letter-spacing:.26em;text-transform:uppercase;color:var(--plum-lt)}
+.nextg .info dd{margin:0;font:700 clamp(17px,2vw,21px)/1.15 var(--f-head);letter-spacing:.04em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.nextg .then{margin:18px 0 0;text-align:center;color:var(--grey);font:600 13px/1.4 var(--f-head);letter-spacing:.16em;text-transform:uppercase}
+.nextg .then b{color:var(--white)}
+.nextg .cd{display:inline-block;margin-top:10px;font:700 12px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;background:var(--plum);color:#fff;padding:7px 11px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){.nextg .eyebrow i{animation:none}}
+@media (max-width:520px){.side small{display:none}.nextg .info{gap:16px 22px}}
+.lt .plate{display:inline-grid;width:30px;vertical-align:-9px;margin-right:12px;box-shadow:none}
+.lt .plate img{width:82%;height:82%}
+@media (max-width:700px){.lt .plate{width:24px;margin-right:8px;vertical-align:-7px}}
+
 /* league table */
 .lt-wrap{overflow-x:auto;border-top:1px solid var(--hair)}
 .lt{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
@@ -136,7 +164,6 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .lt tr.us td{background:rgba(122,52,104,.32);color:var(--white)}
 .lt tr.us td:first-child{box-shadow:inset 3px 0 0 var(--plum-lt)}
 .lt tr.us td.tm{color:#fff}
-.lt tr.us td.tm img{width:30px;height:auto;vertical-align:-8px;margin-right:10px}
 .lt tbody tr{transition:background .2s}
 .lt tbody tr:not(.us):hover td{background:rgba(247,244,246,.03)}
 .lt-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:16px;color:var(--grey);font:600 12px/1.4 var(--f-head);letter-spacing:.18em;text-transform:uppercase}
@@ -230,6 +257,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em;line-height:1
       <div><p class="label">Season 2026/27 · Men's Division 1</p><h2>Fixtures</h2></div>
       <p class="sum" id="fxSum"></p>
     </div>
+    <div id="nextGame"></div>
     <div id="fixturesOut"></div>
   </div></section>
 
@@ -340,6 +368,20 @@ const CLUB = {
   document.querySelectorAll(".mail").forEach(a => { a.href = "mailto:" + CLUB.email; a.textContent = CLUB.email; });
   document.querySelectorAll(".ig").forEach(a => { a.href = igUrl; a.textContent = "Instagram"; });
 
+  // team badges (assets/teams). Matched by name so league-table spellings work too.
+  const BADGES = [
+    [/jesters/i, "assets/jesters-logo-sm.png"],
+    [/bedminster/i, "assets/teams/bedminster.png"],
+    [/bristol\s*vc/i, "assets/teams/bristolvc.png"],
+    [/^cob|city of bristol/i, "assets/teams/cob.png"],
+    [/bath/i, "assets/teams/bath.png"],
+    [/gloucester/i, "assets/teams/gloucester.png"],
+    [/cardiff/i, "assets/teams/cardiff.png"],
+    [/uwe/i, "assets/teams/uwe.png"]
+  ];
+  const badge = n => (BADGES.find(([re]) => re.test(n)) || [])[1];
+  const plate = (n, cls = "") => { const b = badge(n); return b ? `<span class="plate${/jesters/i.test(n) ? " us" : ""}${cls}"><img src="${b}" alt="" loading="lazy"></span>` : ""; };
+
   // fixtures
   const US = CLUB.us;
   const today = new Date(); today.setHours(0,0,0,0);
@@ -385,6 +427,32 @@ const CLUB = {
     if (!open) document.getElementById("fixtures").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
   });
 
+  // next game: first Jesters game on the next matchday
+  (() => {
+    const md = up[0]; if (!md) return;
+    const games = md.slots.filter(([, a, b]) => a === US || b === US);
+    if (!games.length) return;
+    const [tm, a, b] = games[0];
+    const opp = a === US ? b : a;
+    const d = parse(md.date);
+    const days = Math.round((d - today) / 864e5) - 0;
+    const when = days <= 0 ? "Today" : days === 1 ? "Tomorrow" : `In ${days} days`;
+    const side = n => `<div class="side">${plate(n)}<b>${n === US ? "Bristol Jesters" : esc(n)}</b><small>${n === a ? "Home" : "Away"}</small></div>`;
+    const more = games.slice(1).map(([t, x, y]) => `<b>${esc(t)}</b> v ${esc(x === US ? y : x)}`).join(" · ");
+    document.getElementById("nextGame").innerHTML = `<div class="nextg">
+      <p class="eyebrow"><i aria-hidden="true"></i>Next game</p>
+      <div class="vs">${side(a)}<span class="v">V</span>${side(b)}</div>
+      <dl class="info">
+        <div><dt>Date</dt><dd>${d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</dd></div>
+        <div><dt>Start</dt><dd>${esc(tm)}</dd></div>
+        <div><dt>Venue</dt><dd>${esc(md.venue)}</dd></div>
+        <div><dt>Doors</dt><dd>${esc(md.doors)}</dd></div>
+      </dl>
+      ${more ? `<p class="then">Then ${more}</p>` : ""}
+      <p class="then" style="margin-top:6px"><span class="cd">${when}</span></p>
+    </div>`;
+  })();
+
   // league table: refreshed from BADVA by a scheduled GitHub Action (scripts/scrape_league.py)
   const LEAGUE = [
     "https://raw.githubusercontent.com/CleanmatesGH/bristol-jesters-web/main/data/league.json?v=" + Math.floor(Date.now() / 300000),
@@ -399,7 +467,7 @@ const CLUB = {
     const isUs = t => /jesters/i.test(t);
     document.getElementById("ltBody").innerHTML = data.teams.map(t => `<tr${isUs(t.team) ? ' class="us"' : ""}>`
       + `<td class="pos">${t.pos}</td>`
-      + `<td class="tm">${isUs(t.team) ? '<img src="assets/jesters-logo-sm.png" alt="">' : ""}${esc(t.team)}</td>`
+      + `<td class="tm">${plate(t.team)}${esc(t.team)}</td>`
       + `<td>${t.played}</td><td>${t.won}</td><td>${t.lost}</td>`
       + `<td>${t.setsFor}:${t.setsAgainst}</td><td class="wide">${t.pointsFor}:${t.pointsAgainst}</td>`
       + `<td class="pts">${t.pts}</td></tr>`).join("");
