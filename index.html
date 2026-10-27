@@ -147,10 +147,10 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .lt .badge{width:34px;height:34px;vertical-align:-11px;margin-right:12px;filter:none}
 @media (max-width:700px){.lt .badge{width:26px;height:26px;margin-right:8px;vertical-align:-8px}}
 .slot .m .badge{width:26px;height:26px;vertical-align:-7px;margin-right:8px;filter:none}
-.slot .m .badge.b2{margin-left:2px}
+@media (min-width:521px){.slot .m{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:4px}.slot .m .tn{display:flex;align-items:center;min-width:0}.slot .m .tn.r{justify-content:flex-end;text-align:right}.slot .m .tn.r .badge{margin:0 0 0 8px}.slot .m>em{padding:0 .5em}.slot .m .mvp{grid-column:1/-1;text-align:center}}
 .slot.ref .m .badge{opacity:.55}
 .slot .m .tn{white-space:nowrap}
-@media (max-width:520px){.slot .m{display:flex;flex-direction:column;gap:6px}.slot .m>em{display:none}.slot .m .tn{display:flex;align-items:center;white-space:normal}.slot .m .badge{width:22px;height:22px;margin-right:8px;vertical-align:0}.slot .m .mvp{margin-top:2px}}
+@media (max-width:520px){.slot .m{display:flex;flex-direction:column;gap:6px}.slot .m>em{display:none}.slot .m .tn{display:flex;align-items:center;white-space:normal}.slot .m .badge,.slot .m .tn.r .badge{width:22px;height:22px;margin:0 8px 0 0;vertical-align:0;order:-1}.slot .m .tn.r{justify-content:flex-start;text-align:left}.slot .m .mvp{text-align:left}.slot .m .mvp{margin-top:2px}}
 
 /* league table */
 .lt-wrap{overflow-x:auto;border-top:1px solid var(--hair)}
@@ -170,9 +170,11 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .lt-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:16px;color:var(--grey);font:600 12px/1.4 var(--f-head);letter-spacing:.18em;text-transform:uppercase}
 .lt-foot a{color:var(--plum-lt);text-decoration:none}
 .lt-foot a:hover{color:var(--white)}
-.standing{display:flex;align-items:baseline;gap:14px;margin:0}
-.standing b{font:700 clamp(44px,6vw,64px)/.9 var(--f-head);color:var(--white)}
-.standing span{font:600 13px/1.3 var(--f-head);letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+#table .head{flex-wrap:nowrap}
+.standing{display:grid;justify-items:end;gap:8px;margin:0;text-align:right;flex:none}
+.standing b{font:700 clamp(40px,6vw,72px)/.8 var(--f-head);color:var(--white)}
+.standing b sup{font-size:.42em;vertical-align:top;position:relative;top:.12em;margin-left:2px;color:var(--plum-lt)}
+.standing span{font:600 12px/1 var(--f-head);letter-spacing:.22em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
 @media (max-width:700px){.lt td.wide,.lt th.wide{display:none}.lt td{padding:15px 5px;font-size:16px}.lt th{padding:14px 5px;letter-spacing:.14em}.lt td.pts{font-size:20px;width:44px}.lt td.pos{width:30px}.lt td.tm{min-width:0;font-size:16px}.lt tr.us td.tm img{width:24px;margin-right:6px;vertical-align:-6px}}
 
 /* kit */
@@ -387,11 +389,11 @@ const CLUB = {
   const US = CLUB.us;
   const today = new Date(); today.setHours(0,0,0,0);
   const parse = d => new Date(d + "T12:00:00");
-  const team = n => `<span class="tn">${plate(n)}${n === US ? `<span class="us">Jesters</span>` : esc(n)}</span>`;
+  const team = (n, right) => { const name = n === US ? `<span class="us">Jesters</span>` : esc(n); return `<span class="tn${right ? " r" : ""}">${right ? name + plate(n) : plate(n) + name}</span>`; };
   const slot = ([tm, a, b, res, mvp, sets]) => {
     const play = a === US || b === US;
     return `<li class="slot${play ? "" : " ref"}"><span class="tag">${play ? "Play" : "Ref"}</span><span class="tm">${esc(tm)}</span>`
-      + `<span class="m">${team(a)}<em>v</em>${team(b)}${play && (mvp || sets) ? `<small class="mvp">${sets ? `<span class="sets">${esc(sets).split(", ").join(" · ")}</span>` : ""}${mvp ? `MVP <b>${esc(mvp)}</b>` : ""}</small>` : ""}</span>`
+      + `<span class="m">${team(a, true)}<em>v</em>${team(b)}${play && (mvp || sets) ? `<small class="mvp">${sets ? `<span class="sets">${esc(sets).split(", ").join(" · ")}</span>` : ""}${mvp ? `MVP <b>${esc(mvp)}</b>` : ""}</small>` : ""}</span>`
       + `<span class="res${/^win/i.test(res) ? " win" : /^loss|^lost/i.test(res) ? " loss" : ""}">${play ? esc(res) : ""}</span></li>`;
   };
   const day = (md, isNext, past) => {
@@ -473,7 +475,7 @@ const CLUB = {
       + `<td>${t.setsFor}:${t.setsAgainst}</td><td class="wide">${t.pointsFor}:${t.pointsAgainst}</td>`
       + `<td class="pts">${t.pts}</td></tr>`).join("");
     const me = data.teams.find(t => isUs(t.team));
-    if (me) document.getElementById("ltStanding").innerHTML = `<b>${ordinal(me.pos)}</b><span>${me.pts} pts<br>W${me.won} L${me.lost}</span>`;
+    if (me) { const o = ordinal(me.pos); document.getElementById("ltStanding").innerHTML = `<b>${me.pos}<sup>${o.slice(String(me.pos).length)}</sup></b><span>${me.pts} pts · W${me.won} L${me.lost}</span>`; }
     if (data.updated) {
       const d = new Date(data.updated);
       document.getElementById("ltUpdated").textContent = "Updated " + d.toLocaleDateString("en-GB", {day: "numeric", month: "short"}) + ", " + d.toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit"});
