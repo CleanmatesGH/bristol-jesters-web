@@ -6,12 +6,40 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <meta name="theme-color" content="#0A090A">
-<meta property="og:title" content="Bristol Jesters">
-<meta property="og:description" content="Bristol Jesters Volleyball Club">
-<meta property="og:image" content="https://bristoljesters.co.uk/assets/jesters-logo.png">
-<title>Bristol Jesters</title>
+<title>Bristol Jesters Volleyball Club | Bristol Volleyball</title>
+<link rel="canonical" href="https://bristoljesters.co.uk/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bristol Jesters">
+<meta property="og:url" content="https://bristoljesters.co.uk/">
+<meta property="og:title" content="Bristol Jesters Volleyball Club">
+<meta property="og:description" content="Bristol men's volleyball team in BADVA Men's Division 1. Fixtures, results, live league table and our Bristol contour-map kit.">
+<meta property="og:image" content="https://bristoljesters.co.uk/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bristol Jesters Volleyball Club">
+<meta name="twitter:description" content="Bristol men's volleyball team in BADVA Men's Division 1. Fixtures, results and live league table.">
+<meta name="twitter:image" content="https://bristoljesters.co.uk/assets/og-image.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsTeam",
+  "name": "Bristol Jesters",
+  "alternateName": ["Bristol Jesters Volleyball Club", "Bristol Jesters VC", "Jesters"],
+  "sport": "Volleyball",
+  "url": "https://bristoljesters.co.uk/",
+  "logo": "https://bristoljesters.co.uk/assets/jesters-logo.png",
+  "image": "https://bristoljesters.co.uk/assets/og-image.jpg",
+  "email": "hello@bristoljesters.co.uk",
+  "foundingDate": "2026",
+  "location": {"@type": "Place", "name": "Bristol", "address": {"@type": "PostalAddress", "addressLocality": "Bristol", "addressCountry": "GB"}},
+  "memberOf": {"@type": "SportsOrganization", "name": "Bristol & District Volleyball Association", "url": "https://badva.org.uk/"},
+  "sponsor": {"@type": "Organization", "name": "Hop Union Brewery", "url": "https://www.hopunionbrewery.co.uk/"}
+}
+</script>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Bristol Jesters Volleyball Club. Fixtures, kit and official partners.">
+<meta name="description" content="Bristol Jesters is a men's volleyball club in Bristol, playing in BADVA Men's Division 1. Fixtures, results, live league table, kit and partners.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&display=swap">
@@ -35,6 +63,7 @@ body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.6 var(-
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--black)}
 .topo-all{position:fixed;left:0;right:0;top:-10vh;bottom:-10vh;z-index:-5;pointer-events:none;background:url("assets/topography-5m.webp") center/cover no-repeat;opacity:var(--topo,.95);transform:translateZ(0);will-change:opacity}
 @media (min-width:901px) and (hover:hover){.topo-all{background-image:url("assets/topography-5m.svg")}}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 a{color:inherit}
 a:focus-visible{outline:2px solid var(--plum-lt);outline-offset:4px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -257,7 +286,8 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em;line-height:1
 <main id="top">
   <div class="hero">
     <div class="hero-in">
-      <img src="assets/jesters-logo.png" alt="Bristol Jesters" width="900" height="882">
+      <h1 class="sr">Bristol Jesters Volleyball Club</h1>
+      <img src="assets/jesters-logo.png" alt="Bristol Jesters volleyball club logo" width="900" height="882">
       <p class="label">Bristol &nbsp;·&nbsp; Volleyball &nbsp;·&nbsp; 2026/2027</p>
       <a class="sponsor-tag" href="https://www.hopunionbrewery.co.uk/" target="_blank" rel="noopener"><img src="assets/hop-union-roundel.svg" alt="" width="34" height="34"><span>Officially sponsored by <b>Hop Union Brewery</b></span></a>
     </div>
