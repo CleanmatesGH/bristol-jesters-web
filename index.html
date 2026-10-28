@@ -240,6 +240,13 @@ a.partner:hover{background:rgba(20,17,19,.9)}
 .partner p{margin:8px 0 0;color:var(--grey);font-size:15px}
 .partner .go{font:600 13px/1 var(--f-head);letter-spacing:.24em;text-transform:uppercase;color:var(--plum-lt);margin-top:16px;display:inline-block}
 .partner.wide{grid-column:1/-1}
+.partner.cta{background:linear-gradient(135deg,rgba(122,52,104,.38),rgba(10,9,10,.75));align-content:center}
+.partner.cta h3{margin-top:10px}
+.mailline{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:18px!important}
+.pmail{font:700 clamp(17px,2vw,21px)/1.2 var(--f-head);letter-spacing:.04em;color:var(--white);text-decoration:none;border-bottom:1px solid var(--plum-lt);overflow-wrap:anywhere}
+.pmail:hover{color:var(--plum-lt)}
+.copy{font:600 12px/1 var(--f-head);letter-spacing:.2em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid rgba(247,244,246,.3);border-radius:4px;padding:8px 12px;cursor:pointer}
+.copy:hover{border-color:var(--plum-lt)}
 .partner h3{font-size:clamp(28px,3vw,38px)}
 @media (max-width:760px){.partners{grid-template-columns:1fr}.partner.principal{grid-template-columns:1fr}}
 
@@ -359,6 +366,7 @@ footer small{color:var(--grey);font-size:13px;letter-spacing:.06em;line-height:1
    ====================================================== */
 const CLUB = {
   email: "hello@bristoljesters.co.uk",
+  partnerEmail: "partnerships@bristoljesters.co.uk",
   instagram: "bristoljesters",
 
   // Matchdays: three slots each, in order. Format: [time, team A, team B, result, MVP, set scores (Jesters first)]
@@ -388,9 +396,7 @@ const CLUB = {
   // Partners: the first one is shown large as the principal partner
   partners: [
     { name: "Hop Union Brewery", role: "Principal Partner", text: "Independent brewery in Brislington, Bristol. Front-of-shirt sponsor.",
-      url: "https://www.hopunionbrewery.co.uk/", logo: "assets/hop-union-roundel.svg", wordmark: "assets/hop-union-wordmark.svg" },
-    { name: "Spized", role: "Official Kit Supplier", text: "",
-      url: "", logo: "", wordmark: "" }
+      url: "https://www.hopunionbrewery.co.uk/", logo: "assets/hop-union-roundel.svg", wordmark: "assets/hop-union-wordmark.svg" }
   ],
 
   // Instagram feed (Behold JSON feed URL). Leave "" to show a Follow button instead.
@@ -566,11 +572,17 @@ const CLUB = {
     const logo = (p.logo || p.wordmark)
       ? `<div class="logo">${p.logo ? `<img src="${esc(p.logo)}" alt="" style="width:${i?72:120}px">` : ""}${p.wordmark ? `<img src="${esc(p.wordmark)}" alt="${esc(p.name)}" style="width:${i?160:240}px">` : ""}</div>`
       : "";
-    const rest = CLUB.partners.length - 1;
+    const rest = CLUB.partners.length;  // includes the "partner with us" tile
     const wide = i > 0 && i === CLUB.partners.length - 1 && rest % 2 === 1;
     const title = p.wordmark ? "" : `<h3>${esc(p.name)}</h3>`;
     return `<${tag} class="partner${i===0?" principal":""}${wide?" wide":""}"${href}>${logo}<div><p class="label">${esc(p.role)}</p>${title}${p.text ? `<p>${esc(p.text)}</p>` : ""}${p.url?`<span class="go">Visit site →</span>`:""}</div></${tag}>`;
-  }).join("");
+  }).join("") + `<div class="partner cta${(CLUB.partners.length - 1) % 2 === 0 ? " wide" : ""}"><div><p class="label">Partner with us</p><h3>Want to back the Jesters?</h3>`
+    + `<p>Shirt and sleeve sponsorship, matchday partners and kit suppliers. Get your brand in front of Bristol's volleyball community.</p>`
+    + `<p class="mailline"><a class="pmail" href="mailto:${esc(CLUB.partnerEmail)}?subject=${encodeURIComponent("Partnering with Bristol Jesters")}">${esc(CLUB.partnerEmail)}</a><button class="copy" type="button" data-copy="${esc(CLUB.partnerEmail)}">Copy</button></p></div></div>`;
+  document.querySelectorAll("#partnersOut .copy").forEach(b => b.addEventListener("click", () => {
+    const done = () => { b.textContent = "Copied"; setTimeout(() => b.textContent = "Copy", 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done).catch(() => {}); 
+  }));
 
   // instagram: the feed's own username sets the label and every Instagram link
   const igOut = document.getElementById("igOut"), igSection = document.getElementById("instagram");
