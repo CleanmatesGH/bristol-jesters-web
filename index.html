@@ -521,7 +521,7 @@ const CLUB = {
     if (me) { const o = ordinal(me.pos); document.getElementById("ltStanding").innerHTML = `<span>${me.pts} pts · W${me.won} L${me.lost}</span><b>${me.pos}<sup>${o.slice(String(me.pos).length)}</sup></b>`; }
     if (data.updated) {
       const d = new Date(data.updated);
-      document.getElementById("ltUpdated").textContent = "Updated " + d.toLocaleDateString("en-GB", {day: "numeric", month: "short"}) + ", " + d.toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit"});
+      document.getElementById("ltUpdated").textContent = "Last table change " + d.toLocaleDateString("en-GB", {day: "numeric", month: "short"}) + " · Synced with BADVA automatically";
     }
   })();
 
