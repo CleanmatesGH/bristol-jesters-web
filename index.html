@@ -519,9 +519,13 @@ const CLUB = {
       + `<td class="pts">${t.pts}</td></tr>`).join("");
     const me = data.teams.find(t => isUs(t.team));
     if (me) { const o = ordinal(me.pos); document.getElementById("ltStanding").innerHTML = `<span>${me.pts} pts · W${me.won} L${me.lost}</span><b>${me.pos}<sup>${o.slice(String(me.pos).length)}</sup></b>`; }
-    if (data.updated) {
-      const d = new Date(data.updated);
-      document.getElementById("ltUpdated").textContent = "Last table change " + d.toLocaleDateString("en-GB", {day: "numeric", month: "short"}) + " · Synced with BADVA automatically";
+    let stamp = data.updated;
+    for (const u of ["https://raw.githubusercontent.com/CleanmatesGH/bristol-jesters-web/main/data/status.json?v=" + Math.floor(Date.now() / 300000), "data/status.json"]) {
+      try { const st = await getJSON(u); if (st && st.checked) { stamp = st.checked; break; } } catch (e) {}
+    }
+    if (stamp) {
+      const d = new Date(stamp);
+      document.getElementById("ltUpdated").textContent = "Updated " + d.toLocaleDateString("en-GB", {day: "numeric", month: "short"}) + ", " + d.toLocaleTimeString("en-GB", {hour: "2-digit", minute: "2-digit"});
     }
   })();
 

@@ -189,6 +189,12 @@ def main():
         except Exception as e:  # keep the existing file for this job
             failed += 1
             print(f"{job.__name__} failed: {e}", file=sys.stderr)
+    if failed < 2:
+        # record when we last checked, so the site can show it even when nothing changed
+        status = os.path.join(os.path.dirname(__file__), "..", "data", "status.json")
+        with open(status, "w", encoding="utf-8") as f:
+            json.dump({"checked": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}, f)
+            f.write("\n")
     sys.exit(1 if failed == 2 else 0)
 
 
