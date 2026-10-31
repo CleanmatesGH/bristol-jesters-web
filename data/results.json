@@ -2,7 +2,7 @@
   "team": "Bristol Jesters",
   "season": "2026/27",
   "source": "https://badva.org.uk/fixtures.html",
-  "updated": "2026-10-31T16:53:45Z",
+  "updated": "2026-10-31T20:24:01Z",
   "matches": {
     "4": {
       "home": "Bristol Jesters",
@@ -69,6 +69,25 @@
         [
           20,
           25
+        ]
+      ]
+    },
+    "12": {
+      "home": "Bristol Jesters",
+      "away": "Bath Mens 4s",
+      "ref": "Cardiff Wildcats",
+      "sets": [
+        [
+          25,
+          22
+        ],
+        [
+          23,
+          25
+        ],
+        [
+          15,
+          5
         ]
       ]
     }
