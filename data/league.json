@@ -2,7 +2,7 @@
   "division": "Men's Division 1",
   "season": "2026/27",
   "source": "https://badva.org.uk/",
-  "updated": "2026-10-31T20:24:00Z",
+  "updated": "2026-11-01T06:02:19Z",
   "teams": [
     {
       "pos": 1,
@@ -30,6 +30,30 @@
     },
     {
       "pos": 3,
+      "team": "Cardiff Wildcats",
+      "pts": 6,
+      "played": 4,
+      "won": 2,
+      "lost": 2,
+      "setsFor": 5,
+      "setsAgainst": 5,
+      "pointsFor": 205,
+      "pointsAgainst": 191
+    },
+    {
+      "pos": 4,
+      "team": "Bath Mens 4s",
+      "pts": 5,
+      "played": 4,
+      "won": 1,
+      "lost": 3,
+      "setsFor": 4,
+      "setsAgainst": 7,
+      "pointsFor": 199,
+      "pointsAgainst": 239
+    },
+    {
+      "pos": 5,
       "team": "Bristol VC Mens 4",
       "pts": 4,
       "played": 2,
@@ -39,30 +63,6 @@
       "setsAgainst": 0,
       "pointsFor": 100,
       "pointsAgainst": 75
-    },
-    {
-      "pos": 4,
-      "team": "Cardiff Wildcats",
-      "pts": 4,
-      "played": 3,
-      "won": 1,
-      "lost": 2,
-      "setsFor": 3,
-      "setsAgainst": 4,
-      "pointsFor": 140,
-      "pointsAgainst": 142
-    },
-    {
-      "pos": 5,
-      "team": "Bath Mens 4s",
-      "pts": 4,
-      "played": 3,
-      "won": 1,
-      "lost": 2,
-      "setsFor": 3,
-      "setsAgainst": 5,
-      "pointsFor": 150,
-      "pointsAgainst": 174
     },
     {
       "pos": 6,
