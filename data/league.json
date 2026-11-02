@@ -2,7 +2,7 @@
   "division": "Men's Division 1",
   "season": "2026/27",
   "source": "https://badva.org.uk/",
-  "updated": "2026-11-01T06:02:19Z",
+  "updated": "2026-11-02T15:50:23Z",
   "teams": [
     {
       "pos": 1,
@@ -54,6 +54,18 @@
     },
     {
       "pos": 5,
+      "team": "UWE Mens 3",
+      "pts": 5,
+      "played": 4,
+      "won": 1,
+      "lost": 3,
+      "setsFor": 3,
+      "setsAgainst": 7,
+      "pointsFor": 158,
+      "pointsAgainst": 214
+    },
+    {
+      "pos": 6,
       "team": "Bristol VC Mens 4",
       "pts": 4,
       "played": 2,
@@ -65,7 +77,19 @@
       "pointsAgainst": 75
     },
     {
-      "pos": 6,
+      "pos": 7,
+      "team": "CoB Mens",
+      "pts": 4,
+      "played": 4,
+      "won": 0,
+      "lost": 4,
+      "setsFor": 3,
+      "setsAgainst": 8,
+      "pointsFor": 208,
+      "pointsAgainst": 240
+    },
+    {
+      "pos": 8,
       "team": "Gloucester VC",
       "pts": 3,
       "played": 2,
@@ -75,30 +99,6 @@
       "setsAgainst": 2,
       "pointsFor": 101,
       "pointsAgainst": 79
-    },
-    {
-      "pos": 7,
-      "team": "CoB Mens",
-      "pts": 3,
-      "played": 3,
-      "won": 0,
-      "lost": 3,
-      "setsFor": 2,
-      "setsAgainst": 6,
-      "pointsFor": 154,
-      "pointsAgainst": 179
-    },
-    {
-      "pos": 8,
-      "team": "UWE Mens 3",
-      "pts": 3,
-      "played": 3,
-      "won": 0,
-      "lost": 3,
-      "setsFor": 1,
-      "setsAgainst": 6,
-      "pointsFor": 97,
-      "pointsAgainst": 160
     },
     {
       "pos": 9,
