@@ -225,7 +225,10 @@ h2{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);text-transform:uppercase;lett
 .lt-foot a:hover{color:var(--white)}
 #table .head{flex-wrap:nowrap}
 .standing{display:grid;justify-items:end;gap:0;margin:0;text-align:right;flex:none}
-.standing b{font:700 clamp(40px,6vw,72px)/.95 var(--f-head);color:var(--white);margin-top:10px}
+.standing b{position:relative;font:700 clamp(40px,6vw,72px)/.95 var(--f-head);color:var(--white);margin-top:10px}
+.standing .crown{display:inline-block;width:.78em;height:auto;margin-right:.14em;vertical-align:.08em;transform:rotate(-14deg);filter:drop-shadow(0 4px 8px rgba(0,0,0,.5));animation:crownin .7s .3s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes crownin{from{opacity:0;transform:translateY(-12px) rotate(-40deg)}}
+@media (prefers-reduced-motion:reduce){.standing .crown{display:inline-block;width:.78em;height:auto;margin-right:.14em;vertical-align:.08em;transform:rotate(-14deg);filter:drop-shadow(0 4px 8px rgba(0,0,0,.5));animation:crownin .7s .3s cubic-bezier(.3,1.6,.5,1) both}}
 .standing b sup{font-size:.4em;line-height:0;vertical-align:baseline;position:relative;top:-1.1em;margin-left:2px;color:var(--plum-lt)}
 .standing span{font:600 12px/1 var(--f-head);letter-spacing:.22em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
 @media (max-width:700px){.lt td.wide,.lt th.wide{display:none}.lt td{padding:15px 5px;font-size:16px}.lt th{padding:14px 5px;letter-spacing:.14em}.lt td.pts{font-size:20px;width:44px}.lt td.pos{width:30px}.lt td.tm{min-width:0;font-size:16px}.lt tr.us td.tm img{width:24px;margin-right:6px;vertical-align:-6px}}
@@ -567,7 +570,7 @@ const CLUB = {
       + `<td>${t.setsFor}:${t.setsAgainst}</td><td class="wide">${t.pointsFor}:${t.pointsAgainst}</td>`
       + `<td class="pts">${t.pts}</td></tr>`).join("");
     const me = data.teams.find(t => isUs(t.team));
-    if (me) { const o = ordinal(me.pos); document.getElementById("ltStanding").innerHTML = `<span>${me.pts} pts · W${me.won} L${me.lost}</span><b>${me.pos}<sup>${o.slice(String(me.pos).length)}</sup></b>`; }
+    if (me) { const o = ordinal(me.pos); document.getElementById("ltStanding").innerHTML = `<span>${me.pts} pts · W${me.won} L${me.lost}</span><b>${me.pos === 1 ? '<img class="crown" src="assets/crown.png" alt="Top of the table">' : ""}${me.pos}<sup>${o.slice(String(me.pos).length)}</sup></b>`; }
     let stamp = data.updated;
     for (const u of ["https://raw.githubusercontent.com/CleanmatesGH/bristol-jesters-web/main/data/status.json?v=" + Math.floor(Date.now() / 300000), "data/status.json"]) {
       try { const st = await getJSON(u); if (st && st.checked) { stamp = st.checked; break; } } catch (e) {}
