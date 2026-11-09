@@ -2,7 +2,7 @@
   "division": "Men's Division 1",
   "season": "2026/27",
   "source": "https://badva.org.uk/",
-  "updated": "2026-11-02T15:50:23Z",
+  "updated": "2026-11-09T22:20:49Z",
   "teams": [
     {
       "pos": 1,
@@ -30,6 +30,18 @@
     },
     {
       "pos": 3,
+      "team": "Gloucester VC",
+      "pts": 7,
+      "played": 4,
+      "won": 3,
+      "lost": 1,
+      "setsFor": 7,
+      "setsAgainst": 2,
+      "pointsFor": 201,
+      "pointsAgainst": 134
+    },
+    {
+      "pos": 4,
       "team": "Cardiff Wildcats",
       "pts": 6,
       "played": 4,
@@ -41,7 +53,19 @@
       "pointsAgainst": 191
     },
     {
-      "pos": 4,
+      "pos": 5,
+      "team": "Bristol VC Mens 4",
+      "pts": 5,
+      "played": 3,
+      "won": 2,
+      "lost": 1,
+      "setsFor": 4,
+      "setsAgainst": 2,
+      "pointsFor": 126,
+      "pointsAgainst": 125
+    },
+    {
+      "pos": 6,
       "team": "Bath Mens 4s",
       "pts": 5,
       "played": 4,
@@ -53,7 +77,7 @@
       "pointsAgainst": 239
     },
     {
-      "pos": 5,
+      "pos": 7,
       "team": "UWE Mens 3",
       "pts": 5,
       "played": 4,
@@ -65,19 +89,7 @@
       "pointsAgainst": 214
     },
     {
-      "pos": 6,
-      "team": "Bristol VC Mens 4",
-      "pts": 4,
-      "played": 2,
-      "won": 2,
-      "lost": 0,
-      "setsFor": 4,
-      "setsAgainst": 0,
-      "pointsFor": 100,
-      "pointsAgainst": 75
-    },
-    {
-      "pos": 7,
+      "pos": 8,
       "team": "CoB Mens",
       "pts": 4,
       "played": 4,
@@ -89,28 +101,16 @@
       "pointsAgainst": 240
     },
     {
-      "pos": 8,
-      "team": "Gloucester VC",
-      "pts": 3,
-      "played": 2,
-      "won": 1,
-      "lost": 1,
-      "setsFor": 3,
-      "setsAgainst": 2,
-      "pointsFor": 101,
-      "pointsAgainst": 79
-    },
-    {
       "pos": 9,
       "team": "Bedminster VC",
-      "pts": 2,
-      "played": 2,
+      "pts": 3,
+      "played": 3,
       "won": 0,
-      "lost": 2,
+      "lost": 3,
       "setsFor": 1,
-      "setsAgainst": 4,
-      "pointsFor": 91,
-      "pointsAgainst": 111
+      "setsAgainst": 6,
+      "pointsFor": 120,
+      "pointsAgainst": 161
     }
   ]
 }
