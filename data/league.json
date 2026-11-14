@@ -2,10 +2,22 @@
   "division": "Men's Division 1",
   "season": "2026/27",
   "source": "https://badva.org.uk/",
-  "updated": "2026-11-09T22:20:49Z",
+  "updated": "2026-11-14T17:42:30Z",
   "teams": [
     {
       "pos": 1,
+      "team": "Bristol VC Mens 4",
+      "pts": 11,
+      "played": 6,
+      "won": 5,
+      "lost": 1,
+      "setsFor": 10,
+      "setsAgainst": 2,
+      "pointsFor": 278,
+      "pointsAgainst": 237
+    },
+    {
+      "pos": 2,
       "team": "Bristol Jesters",
       "pts": 8,
       "played": 4,
@@ -17,7 +29,7 @@
       "pointsAgainst": 183
     },
     {
-      "pos": 2,
+      "pos": 3,
       "team": "Bath Mens 3",
       "pts": 8,
       "played": 4,
@@ -29,7 +41,7 @@
       "pointsAgainst": 191
     },
     {
-      "pos": 3,
+      "pos": 4,
       "team": "Gloucester VC",
       "pts": 7,
       "played": 4,
@@ -41,31 +53,31 @@
       "pointsAgainst": 134
     },
     {
-      "pos": 4,
-      "team": "Cardiff Wildcats",
-      "pts": 6,
-      "played": 4,
-      "won": 2,
-      "lost": 2,
-      "setsFor": 5,
-      "setsAgainst": 5,
-      "pointsFor": 205,
-      "pointsAgainst": 191
-    },
-    {
       "pos": 5,
-      "team": "Bristol VC Mens 4",
-      "pts": 5,
-      "played": 3,
+      "team": "Cardiff Wildcats",
+      "pts": 7,
+      "played": 5,
       "won": 2,
-      "lost": 1,
-      "setsFor": 4,
-      "setsAgainst": 2,
-      "pointsFor": 126,
-      "pointsAgainst": 125
+      "lost": 3,
+      "setsFor": 5,
+      "setsAgainst": 7,
+      "pointsFor": 249,
+      "pointsAgainst": 243
     },
     {
       "pos": 6,
+      "team": "UWE Mens 3",
+      "pts": 6,
+      "played": 5,
+      "won": 1,
+      "lost": 4,
+      "setsFor": 3,
+      "setsAgainst": 9,
+      "pointsFor": 196,
+      "pointsAgainst": 264
+    },
+    {
+      "pos": 7,
       "team": "Bath Mens 4s",
       "pts": 5,
       "played": 4,
@@ -75,18 +87,6 @@
       "setsAgainst": 7,
       "pointsFor": 199,
       "pointsAgainst": 239
-    },
-    {
-      "pos": 7,
-      "team": "UWE Mens 3",
-      "pts": 5,
-      "played": 4,
-      "won": 1,
-      "lost": 3,
-      "setsFor": 3,
-      "setsAgainst": 7,
-      "pointsFor": 158,
-      "pointsAgainst": 214
     },
     {
       "pos": 8,
@@ -103,14 +103,14 @@
     {
       "pos": 9,
       "team": "Bedminster VC",
-      "pts": 3,
-      "played": 3,
+      "pts": 4,
+      "played": 4,
       "won": 0,
-      "lost": 3,
+      "lost": 4,
       "setsFor": 1,
-      "setsAgainst": 6,
-      "pointsFor": 120,
-      "pointsAgainst": 161
+      "setsAgainst": 8,
+      "pointsFor": 150,
+      "pointsAgainst": 211
     }
   ]
 }
