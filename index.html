@@ -268,7 +268,7 @@ a.partner:hover{background:rgba(20,17,19,.9)}
 
 /* instagram */
 
-.ig-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:6px}
+.ig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:6px}
 .ig-post,.ig-ph{position:relative;display:block;aspect-ratio:1;max-width:100%;overflow:hidden;background:var(--raise)}
 .ig-post img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .3s}
 .ig-post:hover img{transform:scale(1.05);filter:brightness(.8)}
@@ -417,7 +417,7 @@ const CLUB = {
 
   // Instagram feed (Behold JSON feed URL). Leave "" to show a Follow button instead.
   instagramFeed: "https://feeds.behold.so/vRMPB6i870GIc66vIIH3",
-  instagramPosts: 8
+  instagramPosts: 6
 };
 /* ====================================================== */
 
@@ -607,15 +607,18 @@ const CLUB = {
   if (!CLUB.instagramFeed) { igSection.hidden = true; }
   else {
     igOut.innerHTML = `<div class="ig-grid" aria-busy="true">${'<span class="ig-ph"></span>'.repeat(CLUB.instagramPosts)}</div>`;
-    fetch(CLUB.instagramFeed).then(r => { if (!r.ok) throw r.status; return r.json(); }).then(feed => {
+    (async () => {
+      for (const u of ["https://raw.githubusercontent.com/CleanmatesGH/bristol-jesters-web/main/data/instagram.json?v=" + Math.floor(Date.now() / 300000), "data/instagram.json"]) {
+        try { const d = await getJSON(u); if (d && d.posts && d.posts.length) return d; } catch (e) {}
+      }
+      throw "no feed";
+    })().then(feed => {
       if (feed.username) setIg(feed.username);
-      const posts = (feed.posts || []).slice(0, CLUB.instagramPosts);
-      if (!posts.length) throw "empty";
-      const img = p => (p.sizes && (p.sizes.medium || p.sizes.small || p.sizes.large) || {}).mediaUrl || (p.mediaType === "VIDEO" ? p.thumbnailUrl : p.mediaUrl);
+      const posts = feed.posts.slice(0, CLUB.instagramPosts);
       igOut.innerHTML = `<div class="ig-grid">${posts.map(p => {
-        const alt = esc((p.prunedCaption || p.caption || "Instagram post").slice(0, 120));
+        const alt = esc((p.caption || "Instagram post").slice(0, 120));
         const icon = p.mediaType === "VIDEO" ? `<i class="ig-kind">${p.isReel ? "Reel" : "Video"}</i>` : p.mediaType === "CAROUSEL_ALBUM" ? `<i class="ig-kind">Gallery</i>` : "";
-        return `<a class="ig-post" href="${esc(p.permalink)}" target="_blank" rel="noopener"><img src="${esc(img(p))}" alt="${alt}" loading="lazy">${icon}</a>`;
+        return `<a class="ig-post" href="${esc(p.permalink)}" target="_blank" rel="noopener"><img src="${esc(p.image)}" alt="${alt}" loading="lazy">${icon}</a>`;
       }).join("")}</div>`;
     }).catch(() => { igSection.hidden = true; });
   }

@@ -181,21 +181,45 @@ def update_results():
     print("Results:", "updated" if changed else "no change", f"({len(results)} played)")
 
 
+INSTAGRAM_FEED = "https://feeds.behold.so/vRMPB6i870GIc66vIIH3"
+INSTAGRAM_OUT = os.path.join(os.path.dirname(__file__), "..", "data", "instagram.json")
+
+
+def update_instagram():
+    """Copy the Behold feed into the repo so site visitors don't each use a Behold view."""
+    feed = json.loads(fetch(INSTAGRAM_FEED))
+    posts = []
+    for p in feed.get("posts", []):
+        sizes = p.get("sizes") or {}
+        img = (sizes.get("medium") or sizes.get("small") or sizes.get("large") or {}).get("mediaUrl")
+        if not img:
+            img = p.get("thumbnailUrl") if p.get("mediaType") == "VIDEO" else p.get("mediaUrl")
+        if not img or not p.get("permalink"):
+            continue
+        posts.append({"permalink": p["permalink"], "image": img, "mediaType": p.get("mediaType"),
+                      "isReel": p.get("isReel", False), "caption": (p.get("prunedCaption") or p.get("caption") or "")[:200],
+                      "timestamp": p.get("timestamp")})
+    if not posts:
+        raise ValueError("feed had no posts")
+    changed = save(INSTAGRAM_OUT, "posts", posts, {"username": feed.get("username", "")})
+    print("Instagram:", "updated" if changed else "no change", f"({len(posts)} posts)")
+
+
 def main():
     failed = 0
-    for job in (update_table, update_results):
+    for job in (update_table, update_results, update_instagram):
         try:
             job()
         except Exception as e:  # keep the existing file for this job
             failed += 1
             print(f"{job.__name__} failed: {e}", file=sys.stderr)
-    if failed < 2:
+    if failed < 3:
         # record when we last checked, so the site can show it even when nothing changed
         status = os.path.join(os.path.dirname(__file__), "..", "data", "status.json")
         with open(status, "w", encoding="utf-8") as f:
             json.dump({"checked": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}, f)
             f.write("\n")
-    sys.exit(1 if failed == 2 else 0)
+    sys.exit(1 if failed == 3 else 0)
 
 
 if __name__ == "__main__":
