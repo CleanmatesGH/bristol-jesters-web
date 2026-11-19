@@ -2,10 +2,22 @@
   "division": "Men's Division 1",
   "season": "2026/27",
   "source": "https://badva.org.uk/",
-  "updated": "2026-11-18T20:29:49Z",
+  "updated": "2026-11-19T20:35:51Z",
   "teams": [
     {
       "pos": 1,
+      "team": "Gloucester VC",
+      "pts": 11,
+      "played": 6,
+      "won": 5,
+      "lost": 1,
+      "setsFor": 11,
+      "setsAgainst": 2,
+      "pointsFor": 301,
+      "pointsAgainst": 210
+    },
+    {
+      "pos": 2,
       "team": "Bristol VC Mens 4",
       "pts": 11,
       "played": 6,
@@ -17,19 +29,19 @@
       "pointsAgainst": 237
     },
     {
-      "pos": 2,
+      "pos": 3,
       "team": "Bath Mens 3",
-      "pts": 10,
-      "played": 5,
+      "pts": 11,
+      "played": 6,
       "won": 5,
-      "lost": 0,
+      "lost": 1,
       "setsFor": 10,
-      "setsAgainst": 3,
-      "pointsFor": 278,
-      "pointsAgainst": 230
+      "setsAgainst": 5,
+      "pointsFor": 321,
+      "pointsAgainst": 280
     },
     {
-      "pos": 3,
+      "pos": 4,
       "team": "Bristol Jesters",
       "pts": 8,
       "played": 4,
@@ -39,18 +51,6 @@
       "setsAgainst": 3,
       "pointsFor": 233,
       "pointsAgainst": 183
-    },
-    {
-      "pos": 4,
-      "team": "Gloucester VC",
-      "pts": 7,
-      "played": 4,
-      "won": 3,
-      "lost": 1,
-      "setsFor": 7,
-      "setsAgainst": 2,
-      "pointsFor": 201,
-      "pointsAgainst": 134
     },
     {
       "pos": 5,
@@ -67,14 +67,14 @@
     {
       "pos": 6,
       "team": "Bath Mens 4s",
-      "pts": 6,
-      "played": 5,
+      "pts": 7,
+      "played": 6,
       "won": 1,
-      "lost": 4,
+      "lost": 5,
       "setsFor": 4,
-      "setsAgainst": 9,
-      "pointsFor": 238,
-      "pointsAgainst": 289
+      "setsAgainst": 11,
+      "pointsFor": 271,
+      "pointsAgainst": 339
     },
     {
       "pos": 7,
