@@ -2,7 +2,7 @@
   "division": "Men's Division 1",
   "season": "2026/27",
   "source": "https://badva.org.uk/",
-  "updated": "2026-11-19T20:35:51Z",
+  "updated": "2026-11-20T07:14:28Z",
   "teams": [
     {
       "pos": 1,
@@ -55,17 +55,29 @@
     {
       "pos": 5,
       "team": "Cardiff Wildcats",
-      "pts": 7,
-      "played": 5,
+      "pts": 8,
+      "played": 6,
       "won": 2,
-      "lost": 3,
+      "lost": 4,
       "setsFor": 5,
-      "setsAgainst": 7,
-      "pointsFor": 249,
-      "pointsAgainst": 243
+      "setsAgainst": 9,
+      "pointsFor": 286,
+      "pointsAgainst": 294
     },
     {
       "pos": 6,
+      "team": "UWE Mens 3",
+      "pts": 8,
+      "played": 6,
+      "won": 2,
+      "lost": 4,
+      "setsFor": 5,
+      "setsAgainst": 9,
+      "pointsFor": 247,
+      "pointsAgainst": 301
+    },
+    {
+      "pos": 7,
       "team": "Bath Mens 4s",
       "pts": 7,
       "played": 6,
@@ -75,18 +87,6 @@
       "setsAgainst": 11,
       "pointsFor": 271,
       "pointsAgainst": 339
-    },
-    {
-      "pos": 7,
-      "team": "UWE Mens 3",
-      "pts": 6,
-      "played": 5,
-      "won": 1,
-      "lost": 4,
-      "setsFor": 3,
-      "setsAgainst": 9,
-      "pointsFor": 196,
-      "pointsAgainst": 264
     },
     {
       "pos": 8,
