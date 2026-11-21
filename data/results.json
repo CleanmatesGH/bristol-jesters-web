@@ -2,7 +2,7 @@
   "team": "Bristol Jesters",
   "season": "2026/27",
   "source": "https://badva.org.uk/fixtures.html",
-  "updated": "2026-11-01T06:02:19Z",
+  "updated": "2026-11-21T18:45:52Z",
   "matches": {
     "4": {
       "home": "Bristol Jesters",
@@ -107,6 +107,40 @@
         [
           15,
           5
+        ]
+      ]
+    },
+    "28": {
+      "home": "Bristol Jesters",
+      "away": "CoB Mens",
+      "ref": "Bedminster VC",
+      "sets": [
+        [
+          18,
+          25
+        ],
+        [
+          21,
+          25
+        ]
+      ]
+    },
+    "29": {
+      "home": "Bedminster VC",
+      "away": "CoB Mens",
+      "ref": "Bristol Jesters",
+      "sets": [
+        [
+          25,
+          23
+        ],
+        [
+          10,
+          25
+        ],
+        [
+          3,
+          15
         ]
       ]
     }
